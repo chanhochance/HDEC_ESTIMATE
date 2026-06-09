@@ -229,6 +229,7 @@
             :root {
                 --content: 100vw;
             }
+
             .category-row {
                 grid-template-columns: 1fr;
             }
@@ -240,17 +241,21 @@
             .chart-select-group {
                 grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
             }
+
             /* Landscape (horizontal) mode adjustments */
             @media (max-width: 900px) and (orientation: landscape) {
                 .category-row {
                     grid-template-columns: repeat(2, minmax(0, 1fr));
                 }
+
                 .category-label {
                     grid-column: span 2;
                 }
+
                 .chart-select-group {
                     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
                 }
+
                 .chart-select-group .group-label {
                     grid-column: span 4;
                 }
@@ -1688,7 +1693,7 @@
         .indicator-modal-source-wrap a:hover {
             text-decoration: underline;
         }
-    
+
         @media (max-width: 900px) {
             .topbar {
                 top: 0;
@@ -1698,20 +1703,23 @@
                 padding-bottom: 8px;
                 background: rgba(255, 255, 255, 0.95);
             }
+
             .brand-chip {
                 width: 100%;
                 justify-content: center;
             }
+
             .tab-btn {
                 padding: 6px 8px !important;
                 font-size: 13px !important;
             }
+
             .tab-bar {
                 margin-top: 6px;
                 padding: 4px;
             }
         }
-</style>
+    </style>
 </head>
 
 <body class="flex flex-col min-h-screen">
@@ -2946,20 +2954,20 @@
 
                 ctx.save();
                 ctx.font = "700 10px 'Noto Sans KR'";
-                
+
                 // Initialize targetY and sort
                 visible.forEach(item => item.targetY = item.point.y);
                 visible.sort((a, b) => a.targetY - b.targetY);
-                
+
                 // Resolve collisions
                 const minGap = 15;
                 for (let iter = 0; iter < 10; iter++) {
                     for (let i = 0; i < visible.length - 1; i++) {
-                        const diff = visible[i+1].targetY - visible[i].targetY;
+                        const diff = visible[i + 1].targetY - visible[i].targetY;
                         if (diff < minGap) {
                             const overlap = minGap - diff;
                             visible[i].targetY -= overlap / 2;
-                            visible[i+1].targetY += overlap / 2;
+                            visible[i + 1].targetY += overlap / 2;
                         }
                     }
                 }
@@ -2968,7 +2976,7 @@
                     const y = item.targetY;
                     const metrics = ctx.measureText(item.text);
                     const x = item.point.x - 8 - metrics.width;
-                    
+
                     // Draw connector line if the label was moved
                     if (Math.abs(item.targetY - item.point.y) > 2) {
                         ctx.beginPath();
