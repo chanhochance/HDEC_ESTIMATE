@@ -97,8 +97,8 @@
 
         /* Top bar */
         .topbar {
-            position: static;
-            margin-top: 14px;
+            position: sticky;
+            top: 0;
             z-index: 80;
             width: var(--content);
             max-width: 100%;
@@ -1673,7 +1673,30 @@
         .indicator-modal-source-wrap a:hover {
             text-decoration: underline;
         }
-    </style>
+    
+        @media (max-width: 900px) {
+            .topbar {
+                top: 0;
+                margin-top: 0;
+                border-radius: 0;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                background: rgba(255, 255, 255, 0.95);
+            }
+            .brand-chip {
+                width: 100%;
+                justify-content: center;
+            }
+            .tab-btn {
+                padding: 6px 8px !important;
+                font-size: 13px !important;
+            }
+            .tab-bar {
+                margin-top: 6px;
+                padding: 4px;
+            }
+        }
+</style>
 </head>
 
 <body class="flex flex-col min-h-screen">
@@ -1704,7 +1727,7 @@
                 <span class="badge">현대건설</span>
                 <strong>주요 물가지표 통합 모니터링 대시보드</strong>
             </div>
-            <div class="flex items-center gap-2 flex-wrap">
+            <div class="flex items-center justify-between w-full gap-2">
                 <span class="meta-chip">
                     <i data-lucide="calendar" class="w-3.5 h-3.5" style="color: var(--blue);"></i>
                     최종 개정 <span id="last-revision-date">—</span>
@@ -2908,10 +2931,38 @@
 
                 ctx.save();
                 ctx.font = "700 10px 'Noto Sans KR'";
-                visible.forEach((item, i) => {
-                    const y = item.point.y + (i - (visible.length - 1) / 2) * 13;
+                
+                // Initialize targetY and sort
+                visible.forEach(item => item.targetY = item.point.y);
+                visible.sort((a, b) => a.targetY - b.targetY);
+                
+                // Resolve collisions
+                const minGap = 15;
+                for (let iter = 0; iter < 10; iter++) {
+                    for (let i = 0; i < visible.length - 1; i++) {
+                        const diff = visible[i+1].targetY - visible[i].targetY;
+                        if (diff < minGap) {
+                            const overlap = minGap - diff;
+                            visible[i].targetY -= overlap / 2;
+                            visible[i+1].targetY += overlap / 2;
+                        }
+                    }
+                }
+
+                visible.forEach((item) => {
+                    const y = item.targetY;
                     const metrics = ctx.measureText(item.text);
                     const x = item.point.x - 8 - metrics.width;
+                    
+                    // Draw connector line if the label was moved
+                    if (Math.abs(item.targetY - item.point.y) > 2) {
+                        ctx.beginPath();
+                        ctx.moveTo(item.point.x - 2, item.point.y);
+                        ctx.lineTo(item.point.x - 6, item.targetY);
+                        ctx.strokeStyle = item.color + '88';
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
                     const padX = 4;
                     const boxW = metrics.width + padX * 2;
                     const boxH = 12;
