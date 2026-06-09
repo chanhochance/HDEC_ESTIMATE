@@ -97,8 +97,8 @@
 
         /* Top bar */
         .topbar {
-            position: sticky;
-            top: 14px;
+            position: static;
+            margin-top: 14px;
             z-index: 80;
             width: var(--content);
             max-width: 100%;
@@ -1699,7 +1699,7 @@
         <div class="topbar px-1 md:px-4">
             <div class="brand-chip">
                 <span class="badge">현대건설</span>
-                <strong>물가지표 통합 모니터링 대시보드</strong>
+                <strong>주요 물가지표 통합 모니터링 대시보드</strong>
             </div>
             <div class="flex items-center gap-2 flex-wrap">
                 <span class="meta-chip">
@@ -2908,7 +2908,7 @@
                 visible.forEach((item, i) => {
                     const y = item.point.y + (i - (visible.length - 1) / 2) * 13;
                     const metrics = ctx.measureText(item.text);
-                    const x = window.innerWidth < 900 ? item.point.x - 8 - metrics.width : item.point.x + 8;
+                    const x = item.point.x - 8 - metrics.width;
                     const padX = 4;
                     const boxW = metrics.width + padX * 2;
                     const boxH = 12;
