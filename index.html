@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>주요 물가지표 통합 모니터링 및 공사비 시뮬레이터</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -34,7 +36,9 @@
             --content: min(1360px, calc(100vw - 56px));
         }
 
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             margin: 0;
@@ -50,16 +54,19 @@
             min-height: 100vh;
         }
 
-        .hidden { display: none !important; }
+        .hidden {
+            display: none !important;
+        }
 
         /* Login gate */
         #login-gate {
             background-color: var(--navy);
             background-image:
-                linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
+                linear-gradient(to right, rgba(255, 255, 255, .06) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, .06) 1px, transparent 1px);
             background-size: 165px 100%, 100% 124px;
         }
+
         .login-card {
             background: rgba(255, 255, 255, .92);
             backdrop-filter: blur(12px);
@@ -68,7 +75,12 @@
             box-shadow: var(--shadow);
             color: var(--text);
         }
-        .login-card h2 { letter-spacing: -.03em; font-weight: 900; }
+
+        .login-card h2 {
+            letter-spacing: -.03em;
+            font-weight: 900;
+        }
+
         .btn-primary {
             background: var(--blue);
             color: #fff;
@@ -77,6 +89,7 @@
             border-radius: 999px;
             transition: transform .2s ease, box-shadow .2s ease;
         }
+
         .btn-primary:hover {
             transform: translateY(-1px);
             box-shadow: 0 10px 26px rgba(0, 97, 254, .25);
@@ -96,7 +109,10 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-        .brand-chip, .nav-chip, .meta-chip {
+
+        .brand-chip,
+        .nav-chip,
+        .meta-chip {
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -107,7 +123,11 @@
             border-radius: 999px;
             color: var(--text);
         }
-        .brand-chip { padding: 10px 16px; }
+
+        .brand-chip {
+            padding: 10px 16px;
+        }
+
         .brand-chip .badge {
             background: var(--blue);
             color: #fff;
@@ -117,17 +137,20 @@
             border-radius: 6px;
             letter-spacing: .04em;
         }
+
         .brand-chip strong {
             font-size: 14px;
             font-weight: 900;
             letter-spacing: -.02em;
         }
+
         .meta-chip {
             padding: 10px 14px;
             font-size: 12px;
             font-weight: 700;
             color: var(--muted);
         }
+
         .nav-chip {
             padding: 11px 16px;
             border: none;
@@ -136,8 +159,15 @@
             font-size: 13px;
             transition: transform .2s ease;
         }
-        .nav-chip:hover { transform: translateY(-1px); }
-        .nav-chip.admin { color: var(--wine); }
+
+        .nav-chip:hover {
+            transform: translateY(-1px);
+        }
+
+        .nav-chip.admin {
+            color: var(--wine);
+        }
+
         .tab-bar {
             width: var(--content);
             max-width: 100%;
@@ -151,6 +181,7 @@
             border-radius: 999px;
             box-shadow: 0 6px 18px rgba(0, 0, 0, .05);
         }
+
         .tab-btn {
             flex: 1;
             padding: 11px 18px;
@@ -163,12 +194,16 @@
             cursor: pointer;
             transition: all .2s ease;
         }
+
         .tab-btn.active {
             background: var(--navy);
             color: #fff;
             box-shadow: 0 6px 16px rgba(31, 43, 64, .25);
         }
-        .tab-btn:not(.active):hover { background: rgba(0, 0, 0, .04); }
+
+        .tab-btn:not(.active):hover {
+            background: rgba(0, 0, 0, .04);
+        }
 
         /* Main layout */
         .page-shell {
@@ -179,17 +214,27 @@
         }
 
         /* Category indicator rows */
-        .category-section { margin-bottom: 10px; }
+        .category-section {
+            margin-bottom: 10px;
+        }
+
         .category-row {
             display: grid;
             grid-template-columns: 88px repeat(4, minmax(0, 1fr));
             gap: 8px;
             align-items: stretch;
         }
+
         @media (max-width: 900px) {
-            .category-row { grid-template-columns: 1fr 1fr; }
-            .category-label { grid-column: 1 / -1; }
+            .category-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .category-label {
+                grid-column: 1 / -1;
+            }
         }
+
         .category-label {
             display: flex;
             align-items: center;
@@ -204,10 +249,25 @@
             color: #fff;
             box-shadow: 0 6px 18px rgba(0, 0, 0, .07);
         }
-        .category-label.cat-price { background: var(--navy); }
-        .category-label.cat-material { background: var(--orange); color: #3D1A00; }
-        .category-label.cat-gov { background: var(--wine); color: var(--wineText); }
-        .category-label.cat-other { background: var(--sky); color: var(--skyText); }
+
+        .category-label.cat-price {
+            background: var(--navy);
+        }
+
+        .category-label.cat-material {
+            background: var(--orange);
+            color: #3D1A00;
+        }
+
+        .category-label.cat-gov {
+            background: var(--wine);
+            color: var(--wineText);
+        }
+
+        .category-label.cat-other {
+            background: var(--sky);
+            color: var(--skyText);
+        }
 
         .view-month-bar {
             display: flex;
@@ -222,11 +282,13 @@
             border-radius: 14px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, .04);
         }
+
         .view-month-bar label {
             font-size: 12px;
             font-weight: 800;
             color: var(--muted);
         }
+
         .view-month-bar select {
             border: 1px solid var(--line);
             border-radius: 999px;
@@ -248,16 +310,19 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, .04);
             transition: transform .2s ease, box-shadow .2s ease;
         }
+
         .indicator-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 24px rgba(0, 0, 0, .08);
         }
+
         .indicator-card .card-head {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             gap: 4px;
         }
+
         .indicator-card .card-title {
             font-size: 11px;
             font-weight: 900;
@@ -265,7 +330,12 @@
             letter-spacing: -.01em;
             line-height: 1.3;
         }
-        .indicator-card .card-body { flex: 1; min-width: 0; }
+
+        .indicator-card .card-body {
+            flex: 1;
+            min-width: 0;
+        }
+
         .indicator-card .card-main-row {
             display: flex;
             align-items: center;
@@ -273,6 +343,7 @@
             gap: 6px;
             margin-top: 4px;
         }
+
         .indicator-card .card-val {
             margin-top: 0;
             font-size: clamp(14px, 1.4vw, 18px);
@@ -281,6 +352,7 @@
             color: var(--text);
             white-space: nowrap;
         }
+
         .indicator-card .card-changes {
             margin-top: 0;
             flex-shrink: 0;
@@ -292,12 +364,32 @@
             text-align: right;
             white-space: nowrap;
         }
-        .indicator-card .up { color: #c0392b; }
-        .indicator-card .down { color: var(--blue); }
-        .indicator-card .flat { color: var(--muted); }
-        .indicator-card a { color: var(--muted); opacity: .7; }
-        .indicator-card a:hover { opacity: 1; color: var(--blue); }
-        .indicator-card-clickable { cursor: pointer; }
+
+        .indicator-card .up {
+            color: #c0392b;
+        }
+
+        .indicator-card .down {
+            color: var(--blue);
+        }
+
+        .indicator-card .flat {
+            color: var(--muted);
+        }
+
+        .indicator-card a {
+            color: var(--muted);
+            opacity: .7;
+        }
+
+        .indicator-card a:hover {
+            opacity: 1;
+            color: var(--blue);
+        }
+
+        .indicator-card-clickable {
+            cursor: pointer;
+        }
 
         /* Indicator history modal */
         .indicator-modal {
@@ -309,13 +401,18 @@
             justify-content: center;
             padding: 20px;
         }
-        .indicator-modal.hidden { display: none; }
+
+        .indicator-modal.hidden {
+            display: none;
+        }
+
         .indicator-modal-backdrop {
             position: absolute;
             inset: 0;
             background: rgba(15, 23, 42, .45);
             backdrop-filter: blur(3px);
         }
+
         .indicator-modal-panel {
             position: relative;
             width: min(480px, 100%);
@@ -328,6 +425,7 @@
             flex-direction: column;
             overflow: hidden;
         }
+
         .indicator-modal-header {
             display: flex;
             align-items: flex-start;
@@ -336,12 +434,14 @@
             padding: 18px 18px 12px;
             border-bottom: 1px solid var(--line);
         }
+
         .indicator-modal-header h3 {
             margin: 6px 0 0;
             font-size: 17px;
             font-weight: 900;
             letter-spacing: -.03em;
         }
+
         .indicator-modal-cat {
             display: inline-block;
             padding: 3px 9px;
@@ -349,10 +449,27 @@
             font-size: 10px;
             font-weight: 900;
         }
-        .indicator-modal-cat.tag-price { background: var(--navy); color: #fff; }
-        .indicator-modal-cat.tag-material { background: var(--orange); color: #3D1A00; }
-        .indicator-modal-cat.tag-gov { background: var(--wine); color: var(--wineText); }
-        .indicator-modal-cat.tag-other { background: var(--sky); color: var(--skyText); }
+
+        .indicator-modal-cat.tag-price {
+            background: var(--navy);
+            color: #fff;
+        }
+
+        .indicator-modal-cat.tag-material {
+            background: var(--orange);
+            color: #3D1A00;
+        }
+
+        .indicator-modal-cat.tag-gov {
+            background: var(--wine);
+            color: var(--wineText);
+        }
+
+        .indicator-modal-cat.tag-other {
+            background: var(--sky);
+            color: var(--skyText);
+        }
+
         .indicator-modal-close {
             flex-shrink: 0;
             width: 32px;
@@ -365,7 +482,12 @@
             color: var(--muted);
             cursor: pointer;
         }
-        .indicator-modal-close:hover { background: #f5f5f5; color: var(--text); }
+
+        .indicator-modal-close:hover {
+            background: #f5f5f5;
+            color: var(--text);
+        }
+
         .indicator-modal-meta {
             margin: 0;
             padding: 0 18px 10px;
@@ -373,22 +495,26 @@
             font-weight: 700;
             color: var(--muted);
         }
+
         .indicator-modal-body {
             flex: 1;
             overflow-y: auto;
             padding: 0 12px 12px;
         }
+
         .indicator-history-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 12px;
         }
+
         .indicator-history-table th,
         .indicator-history-table td {
             padding: 8px 10px;
             border-bottom: 1px solid var(--line);
             text-align: center;
         }
+
         .indicator-history-table th {
             position: sticky;
             top: 0;
@@ -398,13 +524,37 @@
             color: var(--muted);
             z-index: 1;
         }
-        .indicator-history-table td:first-child { font-weight: 800; }
-        .indicator-history-table td:nth-child(2) { font-weight: 900; }
-        .indicator-history-table tr.is-current { background: rgba(0, 97, 254, .06); }
-        .indicator-history-table tr.is-current td:first-child { color: var(--blue); }
-        .indicator-history-table .up { color: #c0392b; font-weight: 800; }
-        .indicator-history-table .down { color: var(--blue); font-weight: 800; }
-        .indicator-history-table .flat { color: var(--muted); font-weight: 700; }
+
+        .indicator-history-table td:first-child {
+            font-weight: 800;
+        }
+
+        .indicator-history-table td:nth-child(2) {
+            font-weight: 900;
+        }
+
+        .indicator-history-table tr.is-current {
+            background: rgba(0, 97, 254, .06);
+        }
+
+        .indicator-history-table tr.is-current td:first-child {
+            color: var(--blue);
+        }
+
+        .indicator-history-table .up {
+            color: #c0392b;
+            font-weight: 800;
+        }
+
+        .indicator-history-table .down {
+            color: var(--blue);
+            font-weight: 800;
+        }
+
+        .indicator-history-table .flat {
+            color: var(--muted);
+            font-weight: 700;
+        }
 
         /* Panels */
         .panel {
@@ -414,12 +564,14 @@
             border-radius: 18px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, .035);
         }
+
         .section-title {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 16px;
         }
+
         .section-title .step {
             display: inline-grid;
             place-items: center;
@@ -431,12 +583,14 @@
             font-size: 12px;
             font-weight: 900;
         }
+
         .section-title h3 {
             margin: 0;
             font-size: 18px;
             font-weight: 900;
             letter-spacing: -.03em;
         }
+
         .section-heading-with-icon {
             display: flex;
             align-items: center;
@@ -447,11 +601,13 @@
             letter-spacing: -.03em;
             color: var(--ink);
         }
+
         .section-heading-with-icon i,
         .section-heading-with-icon svg {
             flex-shrink: 0;
             color: var(--navy);
         }
+
         .dashboard-section-head {
             display: flex;
             align-items: center;
@@ -460,10 +616,12 @@
             flex-wrap: wrap;
             margin-bottom: 8px;
         }
+
         .dashboard-section-head .section-heading-with-icon {
             flex: 1;
             min-width: 0;
         }
+
         .simulator-panel .section-heading-with-icon {
             color: #fff;
             font-size: 16px;
@@ -473,6 +631,7 @@
             margin-bottom: 16px;
             width: 100%;
         }
+
         .simulator-panel .section-heading-with-icon i,
         .simulator-panel .section-heading-with-icon svg {
             color: #fff;
@@ -483,6 +642,7 @@
             .dashboard-chart-sim-grid {
                 align-items: stretch;
             }
+
             .chart-panel,
             .simulator-panel {
                 display: flex;
@@ -490,16 +650,19 @@
                 height: 100%;
                 min-height: 0;
             }
+
             .chart-canvas-area {
                 flex: 1 1 auto;
                 min-height: 220px;
                 height: auto;
             }
+
             .chart-canvas-area canvas {
                 display: block;
                 width: 100% !important;
                 height: 100% !important;
             }
+
             .simulator-body {
                 flex: 1;
                 display: flex;
@@ -507,6 +670,7 @@
                 gap: 16px;
                 min-height: 0;
             }
+
             .simulator-panel #sim-results-wrap {
                 flex: 1;
                 display: flex;
@@ -514,11 +678,13 @@
                 justify-content: center;
             }
         }
+
         .chart-sim-save-row {
             display: flex;
             justify-content: flex-end;
             margin-top: 12px;
         }
+
         .chart-sim-save-row .btn-download {
             width: auto;
             min-width: 148px;
@@ -527,9 +693,11 @@
             border-color: transparent;
             color: #fff;
         }
+
         .chart-sim-save-row .btn-download:hover {
             background: #0a2d5c;
         }
+
         #capture-area {
             background: var(--bg);
         }
@@ -542,7 +710,13 @@
             gap: 12px;
             margin-bottom: 6px;
         }
-        .chart-head-row .section-title { margin-bottom: 0; flex: 1; min-width: 0; }
+
+        .chart-head-row .section-title {
+            margin-bottom: 0;
+            flex: 1;
+            min-width: 0;
+        }
+
         .chart-head-right {
             flex-shrink: 0;
             display: flex;
@@ -551,6 +725,7 @@
             gap: 6px;
             max-width: min(420px, 52%);
         }
+
         .chart-controls {
             display: flex;
             flex-wrap: wrap;
@@ -559,6 +734,7 @@
             justify-content: flex-end;
             margin-bottom: 0;
         }
+
         .chart-base-select {
             display: flex;
             align-items: center;
@@ -568,6 +744,7 @@
             color: var(--muted);
             white-space: nowrap;
         }
+
         .chart-base-select select {
             border: 1px solid var(--line);
             border-radius: 999px;
@@ -577,11 +754,13 @@
             background: #fff;
             max-width: 108px;
         }
+
         .chart-select-toolbar {
             display: flex;
             justify-content: flex-end;
             margin-bottom: 6px;
         }
+
         .chart-deselect-btn {
             padding: 4px 12px;
             border: 1px solid var(--line);
@@ -593,38 +772,58 @@
             cursor: pointer;
             transition: all .2s ease;
         }
+
         .chart-deselect-btn:hover:not(:disabled) {
             border-color: var(--blue);
             color: var(--blue);
         }
+
         .chart-deselect-btn:disabled {
             opacity: .45;
             cursor: not-allowed;
         }
+
         @media (max-width: 768px) {
-            .chart-head-row { flex-direction: column; gap: 8px; }
-            .chart-head-right { max-width: 100%; align-items: flex-start; }
-            .chart-note { text-align: left; }
-            .chart-controls { justify-content: flex-start; }
+            .chart-head-row {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .chart-head-right {
+                max-width: 100%;
+                align-items: flex-start;
+            }
+
+            .chart-note {
+                text-align: left;
+            }
+
+            .chart-controls {
+                justify-content: flex-start;
+            }
         }
+
         .chart-select-panel {
             display: flex;
             flex-direction: column;
             gap: 6px;
             margin-bottom: 10px;
         }
+
         .chart-canvas-area {
             position: relative;
             width: 100%;
             min-height: 280px;
             height: 280px;
         }
+
         .chart-select-group {
             display: grid;
             grid-template-columns: 76px repeat(4, minmax(0, 1fr));
             gap: 6px;
             align-items: stretch;
         }
+
         .chart-select-group .group-label {
             display: flex;
             align-items: center;
@@ -640,10 +839,26 @@
             color: #fff;
             box-shadow: 0 4px 12px rgba(0, 0, 0, .06);
         }
-        .chart-select-group .group-label.cat-price { background: var(--navy); }
-        .chart-select-group .group-label.cat-material { background: var(--orange); color: #3D1A00; }
-        .chart-select-group .group-label.cat-gov { background: var(--wine); color: var(--wineText); }
-        .chart-select-group .group-label.cat-other { background: var(--sky); color: var(--skyText); }
+
+        .chart-select-group .group-label.cat-price {
+            background: var(--navy);
+        }
+
+        .chart-select-group .group-label.cat-material {
+            background: var(--orange);
+            color: #3D1A00;
+        }
+
+        .chart-select-group .group-label.cat-gov {
+            background: var(--wine);
+            color: var(--wineText);
+        }
+
+        .chart-select-group .group-label.cat-other {
+            background: var(--sky);
+            color: var(--skyText);
+        }
+
         .chart-btn {
             width: 100%;
             min-width: 0;
@@ -665,26 +880,31 @@
             align-items: center;
             justify-content: center;
         }
+
         .chart-btn.active {
             background: var(--navy);
             color: #fff;
             border-color: var(--navy);
         }
+
         .chart-select-group.cat-material .chart-btn.active {
             background: var(--orange);
             color: #3D1A00;
             border-color: var(--orange);
         }
+
         .chart-select-group.cat-gov .chart-btn.active {
             background: var(--wine);
             color: var(--wineText);
             border-color: var(--wine);
         }
+
         .chart-select-group.cat-other .chart-btn.active {
             background: var(--sky);
             color: var(--skyText);
             border-color: var(--sky);
         }
+
         .chart-note {
             font-size: 10px;
             color: var(--muted);
@@ -693,13 +913,16 @@
             text-align: right;
             line-height: 1.35;
         }
+
         .chart-head-right .meta-edit-block {
             text-align: right;
             min-width: 220px;
         }
+
         .chart-head-right .meta-edit-block label {
             font-size: 10px;
         }
+
         .chart-head-right .admin-textarea {
             font-size: 11px;
             min-height: 48px;
@@ -713,6 +936,7 @@
             box-shadow: var(--shadow);
             padding: 24px;
         }
+
         .simulator-panel label {
             display: block;
             font-size: 11px;
@@ -720,6 +944,7 @@
             opacity: .75;
             margin-bottom: 4px;
         }
+
         .simulator-panel select,
         .simulator-panel input {
             width: 100%;
@@ -731,8 +956,15 @@
             font-size: 13px;
             font-weight: 700;
         }
-        .simulator-panel select option { color: var(--text); }
-        .simulator-panel input::placeholder { color: rgba(255, 255, 255, .45); }
+
+        .simulator-panel select option {
+            color: var(--text);
+        }
+
+        .simulator-panel input::placeholder {
+            color: rgba(255, 255, 255, .45);
+        }
+
         .sim-result-box {
             background: rgba(255, 255, 255, .14);
             border: 1px solid rgba(255, 255, 255, .18);
@@ -740,24 +972,29 @@
             padding: 12px 8px;
             text-align: center;
         }
+
         .sim-results-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 0;
             align-items: stretch;
         }
+
         .sim-compare-block {
             min-width: 0;
             padding: 0 6px;
         }
-        .sim-compare-block + .sim-compare-block {
+
+        .sim-compare-block+.sim-compare-block {
             border-left: 1px solid rgba(255, 255, 255, .2);
         }
+
         .sim-compare-block.sim-compare-avg {
             background: rgba(255, 255, 255, .08);
             border-radius: 10px;
             padding: 6px 4px;
         }
+
         .sim-compare-name {
             font-size: 9px;
             font-weight: 800;
@@ -769,36 +1006,48 @@
             align-items: center;
             justify-content: center;
         }
+
         .sim-compare-rate {
             font-size: 15px;
             font-weight: 900;
             letter-spacing: -.02em;
             line-height: 1.2;
         }
+
         .sim-compare-cost {
             font-size: 11px;
             font-weight: 900;
             line-height: 1.3;
             word-break: keep-all;
         }
+
         .sim-compare-diff {
             font-size: 9px;
             font-weight: 700;
             opacity: .9;
             margin-top: 2px;
         }
+
         .sim-extra {
             font-size: 9px;
             font-weight: 700;
             margin-top: 4px;
             line-height: 1.35;
         }
-        .sim-extra.fx-gain { color: #FFB4B4; }
-        .sim-extra.fx-loss { color: #A8E6FF; }
+
+        .sim-extra.fx-gain {
+            color: #FFB4B4;
+        }
+
+        .sim-extra.fx-loss {
+            color: #A8E6FF;
+        }
+
         .sim-extra.krw-value {
             color: #E8F4FF;
             opacity: .95;
         }
+
         .sim-fx-meta {
             font-size: 9px;
             font-weight: 700;
@@ -807,6 +1056,7 @@
             margin-bottom: 8px;
             line-height: 1.4;
         }
+
         .sim-usd-formula {
             font-size: 9px;
             font-weight: 600;
@@ -819,31 +1069,38 @@
             border: 1px solid rgba(255, 255, 255, .12);
             line-height: 1.5;
         }
+
         .sim-usd-formula-line {
             font-weight: 800;
             margin-bottom: 3px;
         }
+
         .sim-usd-formula-sub {
             opacity: .85;
             margin-bottom: 6px;
             font-size: 8.5px;
         }
+
         .sim-usd-formula-ex {
             margin-top: 4px;
             font-size: 8.5px;
         }
+
         .sim-usd-formula-prec-tag {
             opacity: .75;
         }
+
         .sim-unit-toggle label {
             display: block;
             margin-bottom: 6px;
         }
+
         .sim-unit-btns {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 6px;
         }
+
         .sim-unit-btns button {
             padding: 8px 10px;
             border-radius: 10px;
@@ -855,12 +1112,20 @@
             cursor: pointer;
             transition: all .2s ease;
         }
+
         .sim-unit-btns button.active {
             background: rgba(255, 255, 255, .28);
             border-color: rgba(255, 255, 255, .5);
         }
-        .sim-result-box .rate-up { color: #FFB4B4; }
-        .sim-result-box .rate-down { color: #A8E6FF; }
+
+        .sim-result-box .rate-up {
+            color: #FFB4B4;
+        }
+
+        .sim-result-box .rate-down {
+            color: #A8E6FF;
+        }
+
         .btn-download {
             width: 100%;
             margin-top: 12px;
@@ -878,7 +1143,11 @@
             justify-content: center;
             gap: 6px;
         }
-        .btn-download:hover { transform: translateY(-1px); background: rgba(255, 255, 255, .18); }
+
+        .btn-download:hover {
+            transform: translateY(-1px);
+            background: rgba(255, 255, 255, .18);
+        }
 
         /* Admin panel */
         .admin-panel {
@@ -887,11 +1156,13 @@
             border-radius: 18px;
             padding: 20px;
         }
+
         .admin-panel h3 {
             font-size: 15px;
             font-weight: 900;
             color: #B5560F;
         }
+
         .admin-card {
             background: #fff;
             border: 1px solid var(--line);
@@ -908,13 +1179,18 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, .035);
             transition: transform .2s ease;
         }
-        .guide-card:hover { transform: translateY(-2px); }
+
+        .guide-card:hover {
+            transform: translateY(-2px);
+        }
+
         .guide-card h4 {
             margin: 0 0 10px;
             font-size: 16px;
             font-weight: 900;
             letter-spacing: -.03em;
         }
+
         .guide-card .tag {
             display: inline-block;
             padding: 4px 10px;
@@ -924,10 +1200,27 @@
             letter-spacing: .04em;
             margin-bottom: 10px;
         }
-        .guide-card .tag.tag-price { background: var(--navy); color: #fff; }
-        .guide-card .tag.tag-material { background: var(--orange); color: #3D1A00; }
-        .guide-card .tag.tag-gov { background: var(--wine); color: var(--wineText); }
-        .guide-card .tag.tag-other { background: var(--sky); color: var(--skyText); }
+
+        .guide-card .tag.tag-price {
+            background: var(--navy);
+            color: #fff;
+        }
+
+        .guide-card .tag.tag-material {
+            background: var(--orange);
+            color: #3D1A00;
+        }
+
+        .guide-card .tag.tag-gov {
+            background: var(--wine);
+            color: var(--wineText);
+        }
+
+        .guide-card .tag.tag-other {
+            background: var(--sky);
+            color: var(--skyText);
+        }
+
         .guide-card .admin-field-label {
             display: block;
             font-size: 11px;
@@ -935,6 +1228,7 @@
             color: var(--muted);
             margin-bottom: 4px;
         }
+
         .guide-card .admin-input {
             width: 100%;
             padding: 8px 10px;
@@ -943,6 +1237,7 @@
             border-radius: 10px;
             margin-bottom: 8px;
         }
+
         .guide-card .admin-textarea {
             width: 100%;
             padding: 8px 10px;
@@ -952,6 +1247,7 @@
             min-height: 96px;
             resize: vertical;
         }
+
         .meta-edit-block {
             background: rgba(240, 122, 26, .06);
             border: 1px dashed rgba(240, 122, 26, .35);
@@ -959,6 +1255,7 @@
             padding: 12px;
             margin-bottom: 12px;
         }
+
         .meta-edit-block label {
             display: block;
             font-size: 11px;
@@ -966,6 +1263,7 @@
             color: #B5560F;
             margin-bottom: 4px;
         }
+
         .meta-edit-block input,
         .meta-edit-block textarea {
             width: 100%;
@@ -975,7 +1273,12 @@
             border-radius: 10px;
             margin-bottom: 8px;
         }
-        .meta-edit-block textarea { min-height: 64px; resize: vertical; }
+
+        .meta-edit-block textarea {
+            min-height: 64px;
+            resize: vertical;
+        }
+
         .btn-save-meta {
             background: #F07A1A;
             color: #fff;
@@ -986,6 +1289,7 @@
             font-weight: 800;
             cursor: pointer;
         }
+
         .btn-save-guide {
             margin-top: 8px;
             background: #F07A1A;
@@ -1006,12 +1310,14 @@
             padding: 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, .035);
         }
+
         .data-section h4 {
             margin: 0 0 12px;
             font-size: 15px;
             font-weight: 900;
             letter-spacing: -.02em;
         }
+
         .upload-toolbar {
             display: flex;
             flex-wrap: wrap;
@@ -1019,6 +1325,7 @@
             align-items: flex-end;
             margin-bottom: 14px;
         }
+
         .upload-toolbar label span {
             display: block;
             font-size: 11px;
@@ -1026,6 +1333,7 @@
             color: var(--muted);
             margin-bottom: 4px;
         }
+
         .upload-toolbar input[type="month"] {
             border: 1px solid var(--line);
             border-radius: 10px;
@@ -1033,7 +1341,11 @@
             font-size: 13px;
             font-weight: 700;
         }
-        .upload-cat-block { margin-bottom: 12px; }
+
+        .upload-cat-block {
+            margin-bottom: 12px;
+        }
+
         .upload-cat-label {
             font-size: 11px;
             font-weight: 900;
@@ -1041,12 +1353,19 @@
             margin-bottom: 6px;
             letter-spacing: .02em;
         }
+
         .upload-field-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 8px;
         }
-        @media (min-width: 768px) { .upload-field-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+        @media (min-width: 768px) {
+            .upload-field-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+
         .upload-field-grid label span {
             display: block;
             font-size: 10px;
@@ -1055,6 +1374,7 @@
             margin-bottom: 3px;
             line-height: 1.3;
         }
+
         .upload-field-grid input {
             width: 100%;
             border: 1px solid var(--line);
@@ -1063,6 +1383,7 @@
             font-size: 12px;
             font-weight: 600;
         }
+
         .data-action-bar {
             display: flex;
             flex-wrap: wrap;
@@ -1071,12 +1392,15 @@
             justify-content: space-between;
             margin-bottom: 10px;
         }
-        .data-action-bar .left, .data-action-bar .right {
+
+        .data-action-bar .left,
+        .data-action-bar .right {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
             align-items: center;
         }
+
         .btn-data {
             border: none;
             border-radius: 999px;
@@ -1086,17 +1410,39 @@
             cursor: pointer;
             transition: transform .2s ease;
         }
-        .btn-data:hover { transform: translateY(-1px); }
-        .btn-data.primary { background: var(--blue); color: #fff; }
-        .btn-data.warn { background: #F07A1A; color: #fff; }
-        .btn-data.danger { background: #e74c3c; color: #fff; }
-        .btn-data.ghost { background: #fff; border: 1px solid var(--line); color: var(--text); }
+
+        .btn-data:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-data.primary {
+            background: var(--blue);
+            color: #fff;
+        }
+
+        .btn-data.warn {
+            background: #F07A1A;
+            color: #fff;
+        }
+
+        .btn-data.danger {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        .btn-data.ghost {
+            background: #fff;
+            border: 1px solid var(--line);
+            color: var(--text);
+        }
+
         .upload-template-bar {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
             margin-bottom: 12px;
         }
+
         .data-table-wrap {
             overflow: auto;
             border: 1px solid var(--line);
@@ -1104,12 +1450,14 @@
             background: #fff;
             max-height: 420px;
         }
+
         .data-mgmt-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 10px;
             table-layout: fixed;
         }
+
         .data-mgmt-table th {
             background: var(--navy);
             color: #fff;
@@ -1124,12 +1472,14 @@
             z-index: 2;
             vertical-align: middle;
         }
+
         .data-mgmt-table th .th-main {
             display: block;
             font-size: 9px;
             font-weight: 900;
             line-height: 1.2;
         }
+
         .data-mgmt-table th .th-sub {
             display: block;
             margin-top: 2px;
@@ -1138,12 +1488,14 @@
             opacity: .88;
             line-height: 1.15;
         }
+
         .data-mgmt-table th.data-col,
         .data-mgmt-table td.data-col {
             width: 78px;
             min-width: 78px;
             max-width: 78px;
         }
+
         .data-mgmt-table td {
             padding: 6px 2px;
             border-bottom: 1px solid var(--line);
@@ -1152,10 +1504,12 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
         .data-mgmt-table td.cell-unpublished {
             color: var(--muted);
             font-weight: 700;
         }
+
         .data-mgmt-table .sticky-col {
             position: sticky;
             left: 0;
@@ -1164,6 +1518,7 @@
             text-align: center;
             font-weight: 800;
         }
+
         .data-mgmt-table th.sticky-col-check,
         .data-mgmt-table td.sticky-col-check {
             width: 32px;
@@ -1171,6 +1526,7 @@
             max-width: 32px;
             padding: 4px 2px;
         }
+
         .data-mgmt-table th.sticky-col-date,
         .data-mgmt-table td.sticky-col-date {
             width: 52px;
@@ -1178,17 +1534,35 @@
             max-width: 52px;
             font-size: 9px;
         }
-        .data-mgmt-table th.sticky-col { z-index: 3; background: #172033; }
-        .data-mgmt-table th.sticky-col-2 { left: 32px; }
-        .data-mgmt-table td.sticky-col-2 { left: 32px; }
-        .data-mgmt-table tr:hover td { background: rgba(0, 97, 254, .04); }
+
+        .data-mgmt-table th.sticky-col {
+            z-index: 3;
+            background: #172033;
+        }
+
+        .data-mgmt-table th.sticky-col-2 {
+            left: 32px;
+        }
+
+        .data-mgmt-table td.sticky-col-2 {
+            left: 32px;
+        }
+
+        .data-mgmt-table tr:hover td {
+            background: rgba(0, 97, 254, .04);
+        }
+
         .data-mgmt-table tr:hover td.sticky-col,
-        .data-mgmt-table tr:hover td.sticky-col-2 { background: #eef4ff; }
+        .data-mgmt-table tr:hover td.sticky-col-2 {
+            background: #eef4ff;
+        }
+
         .data-count-badge {
             font-size: 11px;
             font-weight: 700;
             color: var(--muted);
         }
+
         .csv-drop {
             border: 1px dashed var(--line);
             border-radius: 12px;
@@ -1199,7 +1573,12 @@
             color: var(--muted);
             cursor: pointer;
         }
-        .csv-drop:hover { border-color: var(--blue); color: var(--blue); }
+
+        .csv-drop:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+        }
+
         .guide-card p {
             margin: 0;
             font-size: 14px;
@@ -1217,7 +1596,12 @@
             color: var(--muted);
             font-weight: 600;
         }
-        footer a { color: var(--blue); text-decoration: underline; }
+
+        footer a {
+            color: var(--blue);
+            text-decoration: underline;
+        }
+
         .footer-sources {
             margin-top: 10px;
             width: 100%;
@@ -1228,35 +1612,43 @@
             overflow-x: auto;
             padding-bottom: 2px;
         }
+
         .footer-source-label {
             display: inline;
             font-weight: 900;
             margin-right: 4px;
         }
+
         .footer-source-block {
             display: inline;
             white-space: nowrap;
         }
+
         .footer-source-block a {
             font-weight: 900;
         }
+
         .footer-source-sep {
             color: #b0b8c4;
             margin: 0 6px;
             user-select: none;
         }
+
         .indicator-card .card-title a {
             color: inherit;
             text-decoration: none;
         }
+
         .indicator-card .card-title a:hover {
             color: var(--blue);
             text-decoration: underline;
         }
+
         .indicator-modal-source-wrap {
             margin: 0;
             padding: 0 18px 12px;
         }
+
         .indicator-modal-source-wrap a {
             display: inline-flex;
             align-items: center;
@@ -1266,9 +1658,13 @@
             color: var(--blue);
             text-decoration: none;
         }
-        .indicator-modal-source-wrap a:hover { text-decoration: underline; }
+
+        .indicator-modal-source-wrap a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
+
 <body class="flex flex-col min-h-screen">
 
     <!-- Login Gate -->
@@ -1279,9 +1675,9 @@
             </div>
             <h2 class="text-2xl mb-6">물가지표 대시보드</h2>
             <input type="password" id="gate-password" placeholder="비밀번호 입력" autofocus
-                   onkeydown="if(event.key === 'Enter') checkGatePassword()"
-                   class="w-full p-3 rounded-xl border text-center mb-4 focus:outline-none focus:border-blue-500"
-                   style="border-color: var(--line); background: #f8f8f6;">
+                onkeydown="if(event.key === 'Enter') checkGatePassword()"
+                class="w-full p-3 rounded-xl border text-center mb-4 focus:outline-none focus:border-blue-500"
+                style="border-color: var(--line); background: #f8f8f6;">
             <button onclick="checkGatePassword()" class="btn-primary w-full p-3">
                 인증 및 접속
             </button>
@@ -1335,120 +1731,130 @@
 
                 <!-- Chart + Simulator -->
                 <div class="dashboard-chart-sim-wrap">
-                <div id="capture-area" class="dashboard-chart-sim-grid grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div class="lg:col-span-2 panel p-6 space-y-2 chart-panel">
-                        <div class="chart-head-row">
-                            <div class="section-title">
-                                <h3 class="section-heading-with-icon">
-                                    <i data-lucide="line-chart" class="w-5 h-5"></i>
-                                    <span id="chart-section-title">지표별 그래프</span>
-                                </h3>
-                            </div>
-                            <div class="chart-head-right">
-                                <div id="chart-note-wrap">
-                                    <p class="chart-note" id="chart-note-text">기준 연월을 100으로 환산한 상승율 그래프 · 단위 차이로 인한 왜곡 방지</p>
+                    <div id="capture-area" class="dashboard-chart-sim-grid grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 panel p-6 space-y-2 chart-panel">
+                            <div class="chart-head-row">
+                                <div class="section-title">
+                                    <h3 class="section-heading-with-icon">
+                                        <i data-lucide="line-chart" class="w-5 h-5"></i>
+                                        <span id="chart-section-title">지표별 그래프</span>
+                                    </h3>
                                 </div>
-                                <div class="chart-controls">
-                                    <div class="chart-base-select">
-                                        <span>기준 연월</span>
-                                        <select id="chart-base-date" onchange="renderTrendsChart()"></select>
+                                <div class="chart-head-right">
+                                    <div id="chart-note-wrap">
+                                        <p class="chart-note" id="chart-note-text">기준 연월을 100으로 환산한 상승율 그래프 · 단위 차이로 인한
+                                            왜곡 방지</p>
                                     </div>
-                                    <div class="chart-base-select">
-                                        <span>변경 연월</span>
-                                        <select id="chart-change-date" onchange="renderTrendsChart()"></select>
+                                    <div class="chart-controls">
+                                        <div class="chart-base-select">
+                                            <span>기준 연월</span>
+                                            <select id="chart-base-date" onchange="renderTrendsChart()"></select>
+                                        </div>
+                                        <div class="chart-base-select">
+                                            <span>변경 연월</span>
+                                            <select id="chart-change-date" onchange="renderTrendsChart()"></select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="chart-select-toolbar">
+                                <button type="button" class="chart-deselect-btn"
+                                    onclick="deselectAllChartKeys()">일괄해제</button>
+                            </div>
+                            <div id="chart-indicator-selector"></div>
+                            <div class="chart-canvas-area">
+                                <canvas id="trendsChart"></canvas>
+                            </div>
                         </div>
-                        <div class="chart-select-toolbar">
-                            <button type="button" class="chart-deselect-btn" onclick="deselectAllChartKeys()">일괄해제</button>
-                        </div>
-                        <div id="chart-indicator-selector"></div>
-                        <div class="chart-canvas-area">
-                            <canvas id="trendsChart"></canvas>
-                        </div>
-                    </div>
 
-                    <div class="simulator-panel">
-                        <h3 class="section-heading-with-icon">
-                            <i data-lucide="calculator" class="w-5 h-5"></i>
-                            <span>ESC 계산기</span>
-                        </h3>
-                        <div class="simulator-body">
-                        <div class="space-y-3 text-sm">
-                            <div class="grid grid-cols-2 gap-2">
-                                <div>
-                                    <label>비교 지표 1</label>
-                                    <select id="sim-indicator-1" onchange="calculateEscalation()"></select>
+                        <div class="simulator-panel">
+                            <h3 class="section-heading-with-icon">
+                                <i data-lucide="calculator" class="w-5 h-5"></i>
+                                <span>ESC 계산기</span>
+                            </h3>
+                            <div class="simulator-body">
+                                <div class="space-y-3 text-sm">
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div>
+                                            <label>비교 지표 1</label>
+                                            <select id="sim-indicator-1" onchange="calculateEscalation()"></select>
+                                        </div>
+                                        <div>
+                                            <label>비교 지표 2</label>
+                                            <select id="sim-indicator-2" onchange="calculateEscalation()"></select>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div>
+                                            <label>기준</label>
+                                            <select id="sim-start-date" onchange="calculateEscalation()"></select>
+                                        </div>
+                                        <div>
+                                            <label>변경</label>
+                                            <select id="sim-end-date" onchange="calculateEscalation()"></select>
+                                        </div>
+                                    </div>
+                                    <div class="sim-unit-toggle">
+                                        <label>표시 단위</label>
+                                        <div class="sim-unit-btns">
+                                            <button type="button" id="sim-unit-krw" class="active"
+                                                onclick="setSimUnit('krw')">원화 (₩)</button>
+                                            <button type="button" id="sim-unit-usd" onclick="setSimUnit('usd')">달러
+                                                ($)</button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label id="sim-cost-label">계약 공사비 입력 (원)</label>
+                                        <input type="number" id="sim-base-cost" value="" oninput="calculateEscalation()"
+                                            placeholder="공사비 입력 (원)">
+                                    </div>
                                 </div>
-                                <div>
-                                    <label>비교 지표 2</label>
-                                    <select id="sim-indicator-2" onchange="calculateEscalation()"></select>
+                                <div class="sim-result-box" id="sim-results-wrap">
+                                    <div class="sim-results-grid">
+                                        <div class="sim-compare-block" id="sim-compare-1">
+                                            <div class="sim-compare-name" id="sim-name-1">—</div>
+                                            <div class="text-xs font-bold uppercase tracking-wider opacity-75 sim-rate-caption"
+                                                id="sim-rate-label">변동율</div>
+                                            <div class="sim-compare-rate" id="sim-rate-1">—</div>
+                                            <div class="text-xs opacity-75 pt-1 sim-final-caption" id="sim-final-label">
+                                                변경 공사비</div>
+                                            <div class="sim-compare-cost" id="sim-cost-1">—</div>
+                                            <div class="sim-compare-diff" id="sim-diff-1"></div>
+                                            <div class="sim-extra hidden" id="sim-extra-1"></div>
+                                        </div>
+                                        <div class="sim-compare-block" id="sim-compare-2">
+                                            <div class="sim-compare-name" id="sim-name-2">—</div>
+                                            <div
+                                                class="text-xs font-bold uppercase tracking-wider opacity-75 sim-rate-caption">
+                                                변동율</div>
+                                            <div class="sim-compare-rate" id="sim-rate-2">—</div>
+                                            <div class="text-xs opacity-75 pt-1 sim-final-caption">변경 공사비</div>
+                                            <div class="sim-compare-cost" id="sim-cost-2">—</div>
+                                            <div class="sim-compare-diff" id="sim-diff-2"></div>
+                                            <div class="sim-extra hidden" id="sim-extra-2"></div>
+                                        </div>
+                                        <div class="sim-compare-block sim-compare-avg" id="sim-compare-avg">
+                                            <div class="sim-compare-name" id="sim-name-avg">산술평균</div>
+                                            <div
+                                                class="text-xs font-bold uppercase tracking-wider opacity-75 sim-rate-caption">
+                                                변동율</div>
+                                            <div class="sim-compare-rate" id="sim-rate-avg">—</div>
+                                            <div class="text-xs opacity-75 pt-1 sim-final-caption">변경 공사비</div>
+                                            <div class="sim-compare-cost" id="sim-cost-avg">—</div>
+                                            <div class="sim-compare-diff" id="sim-diff-avg"></div>
+                                            <div class="sim-extra hidden" id="sim-extra-avg"></div>
+                                        </div>
+                                    </div>
+                                    <div class="sim-fx-meta hidden" id="sim-fx-meta"></div>
                                 </div>
                             </div>
-                            <div class="grid grid-cols-2 gap-2">
-                                <div>
-                                    <label>기준</label>
-                                    <select id="sim-start-date" onchange="calculateEscalation()"></select>
-                                </div>
-                                <div>
-                                    <label>변경</label>
-                                    <select id="sim-end-date" onchange="calculateEscalation()"></select>
-                                </div>
-                            </div>
-                            <div class="sim-unit-toggle">
-                                <label>표시 단위</label>
-                                <div class="sim-unit-btns">
-                                    <button type="button" id="sim-unit-krw" class="active" onclick="setSimUnit('krw')">원화 (₩)</button>
-                                    <button type="button" id="sim-unit-usd" onclick="setSimUnit('usd')">달러 ($)</button>
-                                </div>
-                            </div>
-                            <div>
-                                <label id="sim-cost-label">계약 공사비 입력 (원)</label>
-                                <input type="number" id="sim-base-cost" value="" oninput="calculateEscalation()" placeholder="공사비 입력 (원)">
-                            </div>
-                        </div>
-                        <div class="sim-result-box" id="sim-results-wrap">
-                            <div class="sim-fx-meta hidden" id="sim-fx-meta"></div>
-                            <div class="sim-usd-formula hidden" id="sim-usd-formula"></div>
-                            <div class="sim-results-grid">
-                                <div class="sim-compare-block" id="sim-compare-1">
-                                    <div class="sim-compare-name" id="sim-name-1">—</div>
-                                    <div class="text-xs font-bold uppercase tracking-wider opacity-75 sim-rate-caption" id="sim-rate-label">변동율</div>
-                                    <div class="sim-compare-rate" id="sim-rate-1">—</div>
-                                    <div class="text-xs opacity-75 pt-1 sim-final-caption" id="sim-final-label">변경 공사비</div>
-                                    <div class="sim-compare-cost" id="sim-cost-1">—</div>
-                                    <div class="sim-compare-diff" id="sim-diff-1"></div>
-                                    <div class="sim-extra hidden" id="sim-extra-1"></div>
-                                </div>
-                                <div class="sim-compare-block" id="sim-compare-2">
-                                    <div class="sim-compare-name" id="sim-name-2">—</div>
-                                    <div class="text-xs font-bold uppercase tracking-wider opacity-75 sim-rate-caption">변동율</div>
-                                    <div class="sim-compare-rate" id="sim-rate-2">—</div>
-                                    <div class="text-xs opacity-75 pt-1 sim-final-caption">변경 공사비</div>
-                                    <div class="sim-compare-cost" id="sim-cost-2">—</div>
-                                    <div class="sim-compare-diff" id="sim-diff-2"></div>
-                                    <div class="sim-extra hidden" id="sim-extra-2"></div>
-                                </div>
-                                <div class="sim-compare-block sim-compare-avg" id="sim-compare-avg">
-                                    <div class="sim-compare-name" id="sim-name-avg">산술평균</div>
-                                    <div class="text-xs font-bold uppercase tracking-wider opacity-75 sim-rate-caption">변동율</div>
-                                    <div class="sim-compare-rate" id="sim-rate-avg">—</div>
-                                    <div class="text-xs opacity-75 pt-1 sim-final-caption">변경 공사비</div>
-                                    <div class="sim-compare-cost" id="sim-cost-avg">—</div>
-                                    <div class="sim-compare-diff" id="sim-diff-avg"></div>
-                                    <div class="sim-extra hidden" id="sim-extra-avg"></div>
-                                </div>
-                            </div>
-                        </div>
                         </div>
                     </div>
-                </div>
-                <div class="chart-sim-save-row">
-                    <button type="button" onclick="downloadReport()" class="btn-download">
-                        <i data-lucide="download" class="w-3.5 h-3.5"></i> 이미지 저장
-                    </button>
-                </div>
+                    <div class="chart-sim-save-row">
+                        <button type="button" onclick="downloadReport()" class="btn-download">
+                            <i data-lucide="download" class="w-3.5 h-3.5"></i> 이미지 저장
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -1458,11 +1864,12 @@
                     <div class="section-title">
                         <h3 class="section-heading-with-icon">
                             <i data-lucide="book-open" class="w-5 h-5"></i>
-                            <span id="guide-section-title">개략 가이드</span>
+                            <span id="guide-section-title">가이드</span>
                         </h3>
                     </div>
                     <div id="guide-section-lead-wrap" class="mb-6">
-                        <p class="text-sm" id="guide-section-lead" style="color: var(--muted);">적산 및 계약 검토 시 표준 가이드라인 항목입니다.</p>
+                        <p class="text-sm" id="guide-section-lead" style="color: var(--muted);">적산 및 계약 검토 시 표준 가이드라인
+                            항목입니다.</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="guide-container"></div>
                 </div>
@@ -1471,15 +1878,18 @@
             <!-- Data Management Tab -->
             <div id="content-data" class="hidden space-y-4">
                 <section class="data-section space-y-3">
-                    <div class="flex flex-wrap justify-between items-start gap-3 border-b pb-3" style="border-color: var(--line);">
+                    <div class="flex flex-wrap justify-between items-start gap-3 border-b pb-3"
+                        style="border-color: var(--line);">
                         <div>
                             <h3 class="flex items-center gap-2 m-0" style="font-size:17px;font-weight:900;">
                                 <i data-lucide="database" class="w-5 h-5"></i>
                                 <span id="data-mgmt-title">데이터관리</span>
                             </h3>
-                            <p class="text-sm mt-1 mb-0" id="data-mgmt-lead" style="color: var(--muted);">16개 지표의 월별 원시 데이터를 직접 입력·업로드하고, 부분삭제·일괄삭제할 수 있습니다.</p>
+                            <p class="text-sm mt-1 mb-0" id="data-mgmt-lead" style="color: var(--muted);">16개 지표의 월별 원시
+                                데이터를 직접 입력·업로드하고, 부분삭제·일괄삭제할 수 있습니다.</p>
                         </div>
-                        <span id="data-admin-badge" class="hidden text-xs font-bold px-2.5 py-0.5 rounded-full" style="background: rgba(240,122,26,.15); color: #B5560F;">Admin · 문구수정</span>
+                        <span id="data-admin-badge" class="hidden text-xs font-bold px-2.5 py-0.5 rounded-full"
+                            style="background: rgba(240,122,26,.15); color: #B5560F;">Admin · 문구수정</span>
                     </div>
                     <div id="data-mgmt-meta-edit"></div>
                 </section>
@@ -1516,7 +1926,8 @@
                     <label class="csv-drop block">
                         <i data-lucide="file-spreadsheet" class="w-5 h-5 mx-auto mb-1 opacity-50"></i>
                         양식 파일 선택하여 업로드 (.xlsx · .csv)
-                        <input type="file" id="csv-file-input" accept=".csv,.xlsx,.xls" class="hidden" onchange="handleFileUpload(event)">
+                        <input type="file" id="csv-file-input" accept=".csv,.xlsx,.xls" class="hidden"
+                            onchange="handleFileUpload(event)">
                     </label>
                 </section>
 
@@ -1525,17 +1936,23 @@
                     <h4><i data-lucide="table" class="w-4 h-4 inline"></i> 월별 데이터</h4>
                     <div class="data-action-bar">
                         <div class="left">
-                            <span class="data-count-badge">총 <strong id="data-row-count">0</strong>개월 · <strong id="data-indicator-count">16</strong>개 지표</span>
-                            <label id="data-admin-select-wrap" class="hidden text-xs font-bold flex items-center gap-1 cursor-pointer" style="color: var(--muted);">
-                                <input type="checkbox" id="data-select-all" onchange="toggleSelectAllDataRows(this.checked)"> 전체 선택
+                            <span class="data-count-badge">총 <strong id="data-row-count">0</strong>개월 · <strong
+                                    id="data-indicator-count">16</strong>개 지표</span>
+                            <label id="data-admin-select-wrap"
+                                class="hidden text-xs font-bold flex items-center gap-1 cursor-pointer"
+                                style="color: var(--muted);">
+                                <input type="checkbox" id="data-select-all"
+                                    onchange="toggleSelectAllDataRows(this.checked)"> 전체 선택
                             </label>
                         </div>
                         <div class="right">
                             <button type="button" class="btn-data primary" onclick="downloadAllDataXlsx()">
                                 <i data-lucide="download" class="w-3.5 h-3.5 inline"></i> 엑셀 일괄 다운로드
                             </button>
-                            <div class="hidden" id="data-admin-delete-bar" style="display:flex;gap:8px;align-items:center;">
-                                <button type="button" class="btn-data warn" onclick="deleteCheckedMonths()">선택 월 부분삭제</button>
+                            <div class="hidden" id="data-admin-delete-bar"
+                                style="display:flex;gap:8px;align-items:center;">
+                                <button type="button" class="btn-data warn" onclick="deleteCheckedMonths()">선택 월
+                                    부분삭제</button>
                                 <button type="button" class="btn-data danger" onclick="clearAllData()">전체 일괄삭제</button>
                             </div>
                         </div>
@@ -1557,7 +1974,8 @@
         </footer>
 
         <!-- Indicator history popup -->
-        <div id="indicator-history-modal" class="indicator-modal hidden" role="dialog" aria-modal="true" aria-labelledby="indicator-modal-title">
+        <div id="indicator-history-modal" class="indicator-modal hidden" role="dialog" aria-modal="true"
+            aria-labelledby="indicator-modal-title">
             <div class="indicator-modal-backdrop" onclick="closeIndicatorHistory()"></div>
             <div class="indicator-modal-panel">
                 <div class="indicator-modal-header">
@@ -1565,7 +1983,8 @@
                         <span id="indicator-modal-cat" class="indicator-modal-cat"></span>
                         <h3 id="indicator-modal-title"></h3>
                     </div>
-                    <button type="button" class="indicator-modal-close" onclick="closeIndicatorHistory()" aria-label="닫기">&times;</button>
+                    <button type="button" class="indicator-modal-close" onclick="closeIndicatorHistory()"
+                        aria-label="닫기">&times;</button>
                 </div>
                 <p class="indicator-modal-meta" id="indicator-modal-meta"></p>
                 <p class="indicator-modal-source-wrap">
@@ -1594,17 +2013,17 @@
             {
                 id: 'price', title: '물가지수', cssClass: 'cat-price',
                 indicators: [
-                    { key: 'ccpi_res', label: '건설공사비(주거)', unit: '', link: 'https://cost.kict.re.kr/' },
-                    { key: 'ccpi_nonres', label: '건설공사비(비주거)', unit: '', link: 'https://cost.kict.re.kr/' },
+                    { key: 'ccpi_res', label: '건설공사비\n(주거)', unit: '', link: 'https://cost.kict.re.kr/' },
+                    { key: 'ccpi_nonres', label: '건설공사비\n(비주거)', unit: '', link: 'https://cost.kict.re.kr/' },
                     { key: 'cpi', label: '소비자물가', unit: '', link: 'https://ecos.bok.or.kr/' },
-                    { key: 'gdp_deflator', label: '건설투자GDP디플레이터', unit: '', link: 'https://ecos.bok.or.kr/' }
+                    { key: 'gdp_deflator', label: '건설투자GDP\n디플레이터', unit: '', link: 'https://ecos.bok.or.kr/' }
                 ]
             },
             {
                 id: 'material', title: '주요자재', cssClass: 'cat-material',
                 indicators: [
-                    { key: 'remicon', label: '레미콘(24-27-15)', unit: ' 원/m³', link: 'https://www.kpi.or.kr/www/' },
-                    { key: 'rebar', label: '철근(SD400-D10)', unit: ' 원/ton', link: 'https://www.kpi.or.kr/www/' },
+                    { key: 'remicon', label: '레미콘\n(24-27-15)', unit: ' 원/m³', link: 'https://www.kpi.or.kr/www/' },
+                    { key: 'rebar', label: '철근\n(SD400-D10)', unit: ' 원/ton', link: 'https://www.kpi.or.kr/www/' },
                     { key: 'aluminum', label: '알루미늄', unit: ' $/ton', link: 'https://www.komis.or.kr/' },
                     { key: 'copper', label: '구리', unit: ' $/ton', link: 'https://www.komis.or.kr/' }
                 ]
@@ -1612,19 +2031,19 @@
             {
                 id: 'gov', title: '국가고시', cssClass: 'cat-gov',
                 indicators: [
-                    { key: 'basic_above', label: '기본형건축비(지상)', unit: ' 원/㎡', link: 'https://www.law.go.kr/LSW/main.html' },
-                    { key: 'basic_below', label: '기본형건축비(지하)', unit: ' 원/㎡', link: 'https://www.law.go.kr/LSW/main.html' },
+                    { key: 'basic_above', label: '기본형건축비\n(지상)', unit: ' 원/㎡', link: 'https://www.law.go.kr/LSW/main.html' },
+                    { key: 'basic_below', label: '기본형건축비\n(지하)', unit: ' 원/㎡', link: 'https://www.law.go.kr/LSW/main.html' },
                     { key: 'standard_cost', label: '표준건축비', unit: ' 원/㎡', link: 'https://www.law.go.kr/LSW/main.html' },
-                    { key: 'standard_labor', label: '표준노임(일반)', unit: ' 원/인', link: 'https://www.cak.or.kr/index.do' }
+                    { key: 'standard_labor', label: '표준노임\n(일반)', unit: ' 원/인', link: 'https://www.cak.or.kr/index.do' }
                 ]
             },
             {
                 id: 'other', title: '기타지표', cssClass: 'cat-other',
                 indicators: [
-                    { key: 'oil_brent', label: '유가(브렌트)', unit: ' $/BBL', link: 'https://www.opinet.co.kr/user/main/mainView.do' },
-                    { key: 'oil_dubai', label: '유가(두바이)', unit: ' $/BBL', link: 'https://www.opinet.co.kr/user/main/mainView.do' },
-                    { key: 'fx_usd', label: '환율(원/달러)', unit: ' 원', link: 'https://ecos.bok.or.kr/' },
-                    { key: 'fx_eur', label: '환율(원/유로)', unit: ' 원', link: 'https://ecos.bok.or.kr/' }
+                    { key: 'oil_brent', label: '유가\n(브렌트)', unit: ' $/BBL', link: 'https://www.opinet.co.kr/user/main/mainView.do' },
+                    { key: 'oil_dubai', label: '유가\n(두바이)', unit: ' $/BBL', link: 'https://www.opinet.co.kr/user/main/mainView.do' },
+                    { key: 'fx_usd', label: '환율\n(원/달러)', unit: ' 원', link: 'https://ecos.bok.or.kr/' },
+                    { key: 'fx_eur', label: '환율\n(원/유로)', unit: ' 원', link: 'https://ecos.bok.or.kr/' }
                 ]
             }
         ];
@@ -2274,21 +2693,72 @@
             '#d35400', '#2c3e50', '#c0392b', '#2980b9', '#27ae60', '#9b59b6'
         ];
 
-        const defaultRawData = [
-            { date: '2025-05', ccpi_res: 151.8, ccpi_nonres: 149.2, cpi: 114.5, gdp_deflator: 108.2, rebar: 842000, remicon: 78500, copper: 8120, aluminum: 2280, basic_above: 2085000, basic_below: 1620000, standard_cost: 1960000, standard_labor: 158000, oil_brent: 80.2, oil_dubai: 77.1, fx_usd: 1368, fx_eur: 1485 },
-            { date: '2025-06', ccpi_res: 152.1, ccpi_nonres: 149.6, cpi: 114.7, gdp_deflator: 108.5, rebar: 845000, remicon: 78800, copper: 8180, aluminum: 2295, basic_above: 2085000, basic_below: 1620000, standard_cost: 1960000, standard_labor: 158000, oil_brent: 81.0, oil_dubai: 77.8, fx_usd: 1372, fx_eur: 1490 },
-            { date: '2025-07', ccpi_res: 152.4, ccpi_nonres: 150.0, cpi: 114.9, gdp_deflator: 108.7, rebar: 848000, remicon: 79100, copper: 8220, aluminum: 2310, basic_above: 2085000, basic_below: 1620000, standard_cost: 1960000, standard_labor: 158000, oil_brent: 82.5, oil_dubai: 79.0, fx_usd: 1375, fx_eur: 1495 },
-            { date: '2025-08', ccpi_res: 152.7, ccpi_nonres: 150.3, cpi: 115.0, gdp_deflator: 108.9, rebar: 851000, remicon: 79400, copper: 8260, aluminum: 2325, basic_above: 2085000, basic_below: 1620000, standard_cost: 1960000, standard_labor: 158000, oil_brent: 83.1, oil_dubai: 79.5, fx_usd: 1378, fx_eur: 1498 },
-            { date: '2025-09', ccpi_res: 152.9, ccpi_nonres: 150.6, cpi: 115.2, gdp_deflator: 109.1, rebar: 854000, remicon: 79700, copper: 8290, aluminum: 2340, basic_above: 2085000, basic_below: 1620000, standard_cost: 1960000, standard_labor: 158000, oil_brent: 84.0, oil_dubai: 80.2, fx_usd: 1380, fx_eur: 1500 },
-            { date: '2025-10', ccpi_res: 153.0, ccpi_nonres: 150.8, cpi: 115.3, gdp_deflator: 109.3, rebar: 856000, remicon: 79900, copper: 8310, aluminum: 2350, basic_above: 2085000, basic_below: 1620000, standard_cost: 1960000, standard_labor: 158000, oil_brent: 84.5, oil_dubai: 80.8, fx_usd: 1382, fx_eur: 1502 },
-            { date: '2025-11', ccpi_res: 153.1, ccpi_nonres: 151.0, cpi: 115.4, gdp_deflator: 109.5, rebar: 858000, remicon: 80100, copper: 8330, aluminum: 2360, basic_above: 2085000, basic_below: 1620000, standard_cost: 1960000, standard_labor: 158000, oil_brent: 85.0, oil_dubai: 81.2, fx_usd: 1384, fx_eur: 1504 },
-            { date: '2025-12', ccpi_res: 153.2, ccpi_nonres: 151.2, cpi: 115.1, gdp_deflator: 109.6, rebar: 860000, remicon: 80300, copper: 8340, aluminum: 2370, basic_above: 2105000, basic_below: 1640000, standard_cost: 1980000, standard_labor: 160000, oil_brent: 85.5, oil_dubai: 78.4, fx_usd: 1386, fx_eur: 1506 },
-            { date: '2026-01', ccpi_res: 154.1, ccpi_nonres: 152.0, cpi: 115.4, gdp_deflator: 109.9, rebar: 865000, remicon: 80600, copper: 8420, aluminum: 2385, basic_above: 2105000, basic_below: 1640000, standard_cost: 1980000, standard_labor: 160000, oil_brent: 86.0, oil_dubai: 79.2, fx_usd: 1390, fx_eur: 1510 },
-            { date: '2026-02', ccpi_res: 154.5, ccpi_nonres: 152.4, cpi: 115.8, gdp_deflator: 110.2, rebar: 870000, remicon: 80900, copper: 8500, aluminum: 2400, basic_above: 2105000, basic_below: 1640000, standard_cost: 1980000, standard_labor: 160000, oil_brent: 87.2, oil_dubai: 81.5, fx_usd: 1395, fx_eur: 1515 },
-            { date: '2026-03', ccpi_res: 155.0, ccpi_nonres: 152.9, cpi: 116.1, gdp_deflator: 110.5, rebar: 875000, remicon: 81200, copper: 8610, aluminum: 2420, basic_above: 2145000, basic_below: 1680000, standard_cost: 2020000, standard_labor: 163000, oil_brent: 88.0, oil_dubai: 83.1, fx_usd: 1400, fx_eur: 1520 },
-            { date: '2026-04', ccpi_res: 155.8, ccpi_nonres: 153.5, cpi: 116.3, gdp_deflator: 110.8, rebar: 880000, remicon: 81500, copper: 8750, aluminum: 2440, basic_above: 2145000, basic_below: 1680000, standard_cost: 2020000, standard_labor: 163000, oil_brent: 87.5, oil_dubai: 82.4, fx_usd: 1405, fx_eur: 1525 },
-            { date: '2026-05', ccpi_res: 156.4, ccpi_nonres: 154.0, cpi: 116.7, gdp_deflator: 111.1, rebar: 885000, remicon: 81800, copper: 8900, aluminum: 2460, basic_above: 2145000, basic_below: 1680000, standard_cost: 2020000, standard_labor: 163000, oil_brent: 88.5, oil_dubai: 84.0, fx_usd: 1410, fx_eur: 1530 }
-        ];
+const defaultRawData = [
+    { date: '2021-01', ccpi_res: 103.8, ccpi_nonres: 104.08, cpi: 101.04, gdp_deflator: 103.036, remicon: 76532, rebar: 700000, aluminum: 7918.5, copper: 2013.5, basic_above: 1678000.0, basic_below: 808000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 51.09, oil_dubai: 52.49, fx_usd: 1088.0, fx_eur: 1331.39 },
+    { date: '2021-02', ccpi_res: 104.29, ccpi_nonres: 104.67, cpi: 101.58, gdp_deflator: 103.036, remicon: 76532, rebar: 730000, aluminum: 7827.0, copper: 1985.5, basic_above: 1678000.0, basic_below: 808000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 56.35, oil_dubai: 55.0, fx_usd: 1117.2, fx_eur: 1354.27 },
+    { date: '2021-03', ccpi_res: 105.28, ccpi_nonres: 105.81, cpi: 101.84, gdp_deflator: 103.036, remicon: 76532, rebar: 780000, aluminum: 9198.0, copper: 2154.5, basic_above: 1693000.0, basic_below: 814000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 63.69, oil_dubai: 64.23, fx_usd: 1121.8, fx_eur: 1351.66 },
+    { date: '2021-04', ccpi_res: 107.58, ccpi_nonres: 108.15, cpi: 101.98, gdp_deflator: 106.009, remicon: 76532, rebar: 780000, aluminum: 8768.0, copper: 2212.5, basic_above: 1693000.0, basic_below: 814000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 64.86, oil_dubai: 61.51, fx_usd: 1132.6, fx_eur: 1327.97 },
+    { date: '2021-05', ccpi_res: 109.51, ccpi_nonres: 110.32, cpi: 102.05, gdp_deflator: 106.009, remicon: 76532, rebar: 840000, aluminum: 9961.0, copper: 2434.5, basic_above: 1693000.0, basic_below: 814000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 67.56, oil_dubai: 64.38, fx_usd: 1109.6, fx_eur: 1334.63 },
+    { date: '2021-06', ccpi_res: 110.73, ccpi_nonres: 111.6, cpi: 102.05, gdp_deflator: 106.009, remicon: 76532, rebar: 910000, aluminum: 10212.5, copper: 2461.5, basic_above: 1693000.0, basic_below: 814000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 70.25, oil_dubai: 69.1, fx_usd: 1113.5, fx_eur: 1361.75 },
+    { date: '2021-07', ccpi_res: 111.78, ccpi_nonres: 112.71, cpi: 102.26, gdp_deflator: 111.124, remicon: 76532, rebar: 970000, aluminum: 9342.0, copper: 2481.0, basic_above: 1723000.0, basic_below: 827999.9999999999, standard_cost: 2048000, standard_labor: 230798, oil_brent: 75.84, oil_dubai: 73.85, fx_usd: 1129.5, fx_eur: 1339.47 },
+    { date: '2021-08', ccpi_res: 113.41, ccpi_nonres: 114.61, cpi: 102.75, gdp_deflator: 111.124, remicon: 76532, rebar: 1000000, aluminum: 9737.0, copper: 2635.0, basic_above: 1723000.0, basic_below: 827999.9999999999, standard_cost: 2048000, standard_labor: 230798, oil_brent: 72.89, oil_dubai: 73.28, fx_usd: 1147.5, fx_eur: 1361.57 },
+    { date: '2021-09', ccpi_res: 114.76, ccpi_nonres: 116.01, cpi: 103.17, gdp_deflator: 111.124, remicon: 76532, rebar: 1000000, aluminum: 9312.0, copper: 2667.5, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2048000, standard_labor: 235815, oil_brent: 71.59, oil_dubai: 70.43, fx_usd: 1162.8, fx_eur: 1373.27 },
+    { date: '2021-10', ccpi_res: 115.89, ccpi_nonres: 117.22, cpi: 103.35, gdp_deflator: 113.434, remicon: 84180, rebar: 1068000, aluminum: 9113.0, copper: 2865.0, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2048000, standard_labor: 235815, oil_brent: 79.28, oil_dubai: 75.68, fx_usd: 1185.2, fx_eur: 1372.28 },
+    { date: '2021-11', ccpi_res: 116.26, ccpi_nonres: 117.64, cpi: 103.87, gdp_deflator: 113.434, remicon: 84180, rebar: 1068000, aluminum: 9875.0, copper: 2713.0, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2048000, standard_labor: 235815, oil_brent: 84.71, oil_dubai: 81.99, fx_usd: 1169.6, fx_eur: 1352.12 },
+    { date: '2021-12', ccpi_res: 116.47, ccpi_nonres: 117.84, cpi: 104.04, gdp_deflator: 113.434, remicon: 84180, rebar: 1070000, aluminum: 9571.0, copper: 2669.5, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2048000, standard_labor: 235815, oil_brent: 68.87, oil_dubai: 71.13, fx_usd: 1187.7, fx_eur: 1346.79 },
+    { date: '2022-01', ccpi_res: 118.85, ccpi_nonres: 120.11, cpi: 104.85, gdp_deflator: 113.769, remicon: 84180, rebar: 1076000, aluminum: 9660.0, copper: 2815.5, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2130000, standard_labor: 242931, oil_brent: 78.98, oil_dubai: 76.88, fx_usd: 1185.5, fx_eur: 1348.33 },
+    { date: '2022-02', ccpi_res: 119.13, ccpi_nonres: 120.36, cpi: 105.42, gdp_deflator: 113.769, remicon: 84180, rebar: 1076000, aluminum: 9701.0, copper: 3072.0, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2130000, standard_labor: 242931, oil_brent: 91.11, oil_dubai: 87.46, fx_usd: 1205.7, fx_eur: 1362.98 },
+    { date: '2022-03', ccpi_res: 120.31, ccpi_nonres: 121.5, cpi: 106.1, gdp_deflator: 113.769, remicon: 84180, rebar: 1095000, aluminum: 9976.0, copper: 3495.5, basic_above: 1829000.0, basic_below: 880000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 104.97, oil_dubai: 98.71, fx_usd: 1205.6, fx_eur: 1341.17 },
+    { date: '2022-04', ccpi_res: 121.99, ccpi_nonres: 123.21, cpi: 106.83, gdp_deflator: 115.623, remicon: 84180, rebar: 1107000, aluminum: 10247.0, copper: 3483.0, basic_above: 1829000.0, basic_below: 880000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 104.39, oil_dubai: 101.61, fx_usd: 1210.7, fx_eur: 1340.55 },
+    { date: '2022-05', ccpi_res: 123.48, ccpi_nonres: 124.72, cpi: 107.5, gdp_deflator: 115.623, remicon: 84180, rebar: 1160000, aluminum: 9511.0, copper: 2911.5, basic_above: 1829000.0, basic_below: 880000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 110.14, oil_dubai: 104.7, fx_usd: 1265.4, fx_eur: 1334.74 },
+    { date: '2022-06', ccpi_res: 123.67, ccpi_nonres: 124.89, cpi: 108.21, gdp_deflator: 115.623, remicon: 95120, rebar: 1185000, aluminum: 9455.0, copper: 2701.5, basic_above: 1829000.0, basic_below: 880000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 116.29, oil_dubai: 112.7, fx_usd: 1238.4, fx_eur: 1319.14 },
+    { date: '2022-07', ccpi_res: 124.08, ccpi_nonres: 125.13, cpi: 108.73, gdp_deflator: 118.375, remicon: 95120, rebar: 1207000, aluminum: 7975.5, copper: 2384.0, basic_above: 1857000.0, basic_below: 894000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 111.63, oil_dubai: 106.34, fx_usd: 1299.8, fx_eur: 1361.87 },
+    { date: '2022-08', ccpi_res: 123.14, ccpi_nonres: 124.35, cpi: 108.63, gdp_deflator: 118.375, remicon: 95120, rebar: 1189000, aluminum: 7930.5, copper: 2469.5, basic_above: 1857000.0, basic_below: 894000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 100.03, oil_dubai: 101.54, fx_usd: 1298.6, fx_eur: 1326.78 },
+    { date: '2022-09', ccpi_res: 124.21, ccpi_nonres: 125.32, cpi: 108.82, gdp_deflator: 118.375, remicon: 95120, rebar: 1035000, aluminum: 7702.0, copper: 2306.0, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2130000, standard_labor: 248819, oil_brent: 92.36, oil_dubai: 93.99, fx_usd: 1345.1, fx_eur: 1351.69 },
+    { date: '2022-10', ccpi_res: 124.24, ccpi_nonres: 125.3, cpi: 109.16, gdp_deflator: 120.062, remicon: 95120, rebar: 1035000, aluminum: 7524.0, copper: 2164.0, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2130000, standard_labor: 248819, oil_brent: 88.86, oil_dubai: 88.28, fx_usd: 1432.1, fx_eur: 1408.18 },
+    { date: '2022-11', ccpi_res: 124.44, ccpi_nonres: 125.4, cpi: 109.07, gdp_deflator: 120.062, remicon: 95120, rebar: 1035000, aluminum: 7745.0, copper: 2245.5, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2130000, standard_labor: 248819, oil_brent: 94.65, oil_dubai: 91.44, fx_usd: 1422.2, fx_eur: 1405.7 },
+    { date: '2022-12', ccpi_res: 124.23, ccpi_nonres: 125.12, cpi: 109.26, gdp_deflator: 120.062, remicon: 95120, rebar: 1035000, aluminum: 8216.5, copper: 2430.5, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2130000, standard_labor: 248819, oil_brent: 86.88, oil_dubai: 81.37, fx_usd: 1320.1, fx_eur: 1375.02 },
+    { date: '2023-01', ccpi_res: 125.98, ccpi_nonres: 126.83, cpi: 110.07, gdp_deflator: 118.751, remicon: 95120, rebar: 1035000, aluminum: 8390.0, copper: 2337.5, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 82.1, oil_dubai: 82.07, fx_usd: 1267.3, fx_eur: 1355.25 },
+    { date: '2023-02', ccpi_res: 126.05, ccpi_nonres: 126.9, cpi: 110.33, gdp_deflator: 118.751, remicon: 99330, rebar: 1035000, aluminum: 9175.0, copper: 2611.0, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 82.84, oil_dubai: 83.6, fx_usd: 1230.8, fx_eur: 1337.02 },
+    { date: '2023-03', ccpi_res: 126.28, ccpi_nonres: 127.09, cpi: 110.52, gdp_deflator: 118.751, remicon: 100350, rebar: 1022000, aluminum: 9066.5, copper: 2364.0, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 84.31, oil_dubai: 82.48, fx_usd: 1319.2, fx_eur: 1407.59 },
+    { date: '2023-04', ccpi_res: 126.4, ccpi_nonres: 127.24, cpi: 110.77, gdp_deflator: 118.451, remicon: 105100, rebar: 1035000, aluminum: 8966.0, copper: 2380.5, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 84.93, oil_dubai: 84.1, fx_usd: 1295.4, fx_eur: 1401.23 },
+    { date: '2023-05', ccpi_res: 126.49, ccpi_nonres: 127.27, cpi: 111.13, gdp_deflator: 118.451, remicon: 105100, rebar: 1043000, aluminum: 8573.0, copper: 2353.0, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 75.32, oil_dubai: 78.61, fx_usd: 1339.1, fx_eur: 1469.33 },
+    { date: '2023-06', ccpi_res: 126.51, ccpi_nonres: 127.36, cpi: 111.16, gdp_deflator: 118.451, remicon: 105100, rebar: 1043000, aluminum: 8210.5, copper: 2281.0, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 74.28, oil_dubai: 71.66, fx_usd: 1321.6, fx_eur: 1413.39 },
+    { date: '2023-07', ccpi_res: 126.34, ccpi_nonres: 127.19, cpi: 111.29, gdp_deflator: 122.061, remicon: 105100, rebar: 1043000, aluminum: 8355.0, copper: 2107.0, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 74.65, oil_dubai: 75.21, fx_usd: 1319.4, fx_eur: 1439.47 },
+    { date: '2023-08', ccpi_res: 126.33, ccpi_nonres: 127.19, cpi: 112.28, gdp_deflator: 122.061, remicon: 105100, rebar: 1043000, aluminum: 8720.5, copper: 2217.0, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 84.91, oil_dubai: 85.85, fx_usd: 1273.8, fx_eur: 1401.12 },
+    { date: '2023-09', ccpi_res: 128.33, ccpi_nonres: 129.09, cpi: 112.85, gdp_deflator: 122.061, remicon: 105100, rebar: 1043000, aluminum: 8515.0, copper: 2184.0, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2257000, standard_labor: 265516, oil_brent: 89.0, oil_dubai: 89.47, fx_usd: 1322.3, fx_eur: 1433.77 },
+    { date: '2023-10', ccpi_res: 128.15, ccpi_nonres: 128.9, cpi: 113.27, gdp_deflator: 122.265, remicon: 105100, rebar: 1043000, aluminum: 8100.5, copper: 2286.5, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2257000, standard_labor: 265516, oil_brent: 90.71, oil_dubai: 93.12, fx_usd: 1351.3, fx_eur: 1414.2 },
+    { date: '2023-11', ccpi_res: 127.99, ccpi_nonres: 128.7, cpi: 112.68, gdp_deflator: 122.265, remicon: 105100, rebar: 1043000, aluminum: 8041.0, copper: 2230.5, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2257000, standard_labor: 265516, oil_brent: 84.63, oil_dubai: 86.25, fx_usd: 1349.6, fx_eur: 1427.88 },
+    { date: '2023-12', ccpi_res: 127.87, ccpi_nonres: 128.58, cpi: 112.73, gdp_deflator: 122.265, remicon: 105100, rebar: 1021000, aluminum: 8456.0, copper: 2147.5, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2257000, standard_labor: 265516, oil_brent: 78.88, oil_dubai: 81.31, fx_usd: 1290.4, fx_eur: 1405.37 },
+    { date: '2024-01', ccpi_res: 128.93, ccpi_nonres: 129.52, cpi: 113.17, gdp_deflator: 121.811, remicon: 105100, rebar: 1011000, aluminum: 8430.0, copper: 2336.5, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2319000, standard_labor: 270789, oil_brent: 75.89, oil_dubai: 78.1, fx_usd: 1289.4, fx_eur: 1423.63 },
+    { date: '2024-02', ccpi_res: 129.21, ccpi_nonres: 129.77, cpi: 113.78, gdp_deflator: 121.811, remicon: 105100, rebar: 998000, aluminum: 8437.0, copper: 2212.5, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2319000, standard_labor: 270789, oil_brent: 78.7, oil_dubai: 80.31, fx_usd: 1333.5, fx_eur: 1442.11 },
+    { date: '2024-03', ccpi_res: 129.14, ccpi_nonres: 129.74, cpi: 113.95, gdp_deflator: 121.811, remicon: 110980, rebar: 998000, aluminum: 8394.0, copper: 2183.5, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 83.55, oil_dubai: 81.55, fx_usd: 1334.1, fx_eur: 1446.56 },
+    { date: '2024-04', ccpi_res: 129.1, ccpi_nonres: 129.71, cpi: 114.01, gdp_deflator: 120.161, remicon: 110980, rebar: 998000, aluminum: 8920.0, copper: 2322.5, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 87.42, oil_dubai: 87.65, fx_usd: 1347.4, fx_eur: 1453.44 },
+    { date: '2024-05', ccpi_res: 129.08, ccpi_nonres: 129.74, cpi: 114.1, gdp_deflator: 120.161, remicon: 110980, rebar: 998000, aluminum: 9791.0, copper: 2554.5, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 83.67, oil_dubai: 84.52, fx_usd: 1378.0, fx_eur: 1476.46 },
+    { date: '2024-06', ccpi_res: 128.95, ccpi_nonres: 129.62, cpi: 113.84, gdp_deflator: 120.161, remicon: 110980, rebar: 948000, aluminum: 9985.5, copper: 2625.0, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 78.36, oil_dubai: 81.91, fx_usd: 1381.6, fx_eur: 1499.17 },
+    { date: '2024-07', ccpi_res: 128.79, ccpi_nonres: 129.5, cpi: 114.13, gdp_deflator: 123.054, remicon: 110980, rebar: 908000, aluminum: 9517.0, copper: 2496.5, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 86.6, oil_dubai: 85.65, fx_usd: 1382.4, fx_eur: 1484.35 },
+    { date: '2024-08', ccpi_res: 128.7, ccpi_nonres: 129.34, cpi: 114.54, gdp_deflator: 123.054, remicon: 110980, rebar: 888000, aluminum: 8998.0, copper: 2228.5, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 79.52, oil_dubai: 80.53, fx_usd: 1380.1, fx_eur: 1493.75 },
+    { date: '2024-09', ccpi_res: 129.43, ccpi_nonres: 130.02, cpi: 114.65, gdp_deflator: 123.054, remicon: 110980, rebar: 918000, aluminum: 9034.0, copper: 2390.5, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2319000, standard_labor: 274286, oil_brent: 77.52, oil_dubai: 76.48, fx_usd: 1334.8, fx_eur: 1474.35 },
+    { date: '2024-10', ccpi_res: 129.23, ccpi_nonres: 129.85, cpi: 114.69, gdp_deflator: 123.362, remicon: 110980, rebar: 938000, aluminum: 9741.0, copper: 2635.0, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2319000, standard_labor: 274286, oil_brent: 73.56, oil_dubai: 70.76, fx_usd: 1306.9, fx_eur: 1446.15 },
+    { date: '2024-11', ccpi_res: 129.17, ccpi_nonres: 129.75, cpi: 114.4, gdp_deflator: 123.362, remicon: 110980, rebar: 908000, aluminum: 9425.0, copper: 2613.5, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2319000, standard_labor: 274286, oil_brent: 73.1, oil_dubai: 73.56, fx_usd: 1379.3, fx_eur: 1501.44 },
+    { date: '2024-12', ccpi_res: 129.01, ccpi_nonres: 129.61, cpi: 114.91, gdp_deflator: 123.362, remicon: 110980, rebar: 858000, aluminum: 8871.0, copper: 2564.5, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2319000, standard_labor: 274286, oil_brent: 71.83, oil_dubai: 72.11, fx_usd: 1395.1, fx_eur: 1471.9 },
+    { date: '2025-01', ccpi_res: 129.88, ccpi_nonres: 130.47, cpi: 115.71, gdp_deflator: 122.316, remicon: 110980, rebar: 848000, aluminum: 8685.5, copper: 2536.0, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 75.93, oil_dubai: 75.18, fx_usd: 1470.0, fx_eur: 1521.96 },
+    { date: '2025-02', ccpi_res: 129.85, ccpi_nonres: 130.44, cpi: 116.08, gdp_deflator: 122.316, remicon: 110980, rebar: 838000, aluminum: 8866.5, copper: 2584.0, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 75.96, oil_dubai: 79.04, fx_usd: 1453.0, fx_eur: 1491.5 },
+    { date: '2025-03', ccpi_res: 129.8, ccpi_nonres: 130.53, cpi: 116.29, gdp_deflator: 122.316, remicon: 110980, rebar: 838000, aluminum: 9360.5, copper: 2624.0, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 71.62, oil_dubai: 73.23, fx_usd: 1458.7, fx_eur: 1529.37 },
+    { date: '2025-04', ccpi_res: 129.81, ccpi_nonres: 130.53, cpi: 116.38, gdp_deflator: 120.638, remicon: 110980, rebar: 818000, aluminum: 9652.0, copper: 2499.0, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 74.49, oil_dubai: 75.97, fx_usd: 1470.6, fx_eur: 1590.9 },
+    { date: '2025-05', ccpi_res: 129.82, ccpi_nonres: 130.56, cpi: 116.27, gdp_deflator: 120.638, remicon: 108200, rebar: 838000, aluminum: 9195.0, copper: 2377.5, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 61.29, oil_dubai: 62.0, fx_usd: 1426.9, fx_eur: 1611.54 },
+    { date: '2025-06', ccpi_res: 129.82, ccpi_nonres: 130.59, cpi: 116.31, gdp_deflator: 120.638, remicon: 108200, rebar: 858000, aluminum: 9655.0, copper: 2451.0, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 64.63, oil_dubai: 63.93, fx_usd: 1375.7, fx_eur: 1562.73 },
+    { date: '2025-07', ccpi_res: 129.85, ccpi_nonres: 130.59, cpi: 116.52, gdp_deflator: 124.093, remicon: 108200, rebar: 828000, aluminum: 10061.0, copper: 2604.0, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 67.11, oil_dubai: 68.16, fx_usd: 1353.6, fx_eur: 1595.42 },
+    { date: '2025-08', ccpi_res: 129.72, ccpi_nonres: 130.48, cpi: 116.45, gdp_deflator: 124.093, remicon: 108200, rebar: 828000, aluminum: 9535.5, copper: 2545.0, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 69.67, oil_dubai: 73.75, fx_usd: 1390.4, fx_eur: 1588.18 },
+    { date: '2025-09', ccpi_res: 130.32, ccpi_nonres: 131.19, cpi: 117.06, gdp_deflator: 124.093, remicon: 108200, rebar: 828000, aluminum: 9804.5, copper: 2612.5, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2380000, standard_labor: 278832, oil_brent: 68.15, oil_dubai: 70.72, fx_usd: 1387.7, fx_eur: 1621.87 },
+    { date: '2025-10', ccpi_res: 130.43, ccpi_nonres: 131.33, cpi: 117.42, gdp_deflator: 124.465, remicon: 108200, rebar: 798000, aluminum: 10263.0, copper: 2683.5, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2380000, standard_labor: 278832, oil_brent: 65.35, oil_dubai: 66.56, fx_usd: 1403.2, fx_eur: 1647.71 },
+    { date: '2025-11', ccpi_res: 130.73, ccpi_nonres: 131.72, cpi: 117.2, gdp_deflator: 124.465, remicon: 108200, rebar: 798000, aluminum: 10872.5, copper: 2903.0, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2380000, standard_labor: 278832, oil_brent: 64.89, oil_dubai: 66.69, fx_usd: 1427.4, fx_eur: 1646.72 },
+    { date: '2025-12', ccpi_res: 130.76, ccpi_nonres: 131.83, cpi: 117.57, gdp_deflator: 124.465, remicon: 108200, rebar: 788000, aluminum: 11299.0, copper: 2860.0, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2380000, standard_labor: 278832, oil_brent: 63.17, oil_dubai: 64.26, fx_usd: 1465.9, fx_eur: 1701.18 },
+    { date: '2026-01', ccpi_res: 131.36, ccpi_nonres: 132.5, cpi: 118.03, gdp_deflator: 125.243, remicon: 108200, rebar: 768000, aluminum: 12571.0, copper: 2986.0, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2392000, standard_labor: 279988, oil_brent: 60.75, oil_dubai: 60.32, fx_usd: 1434.9, fx_eur: 1685.72 },
+    { date: '2026-02', ccpi_res: 131.56, ccpi_nonres: 132.69, cpi: 118.4, gdp_deflator: 125.243, remicon: 108200, rebar: 828000, aluminum: 12987.0, copper: 3042.0, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2392000, standard_labor: 279988, oil_brent: 66.3, oil_dubai: 64.98, fx_usd: 1436.7, fx_eur: 1701.2 },
+    { date: '2026-03', ccpi_res: 132.27, ccpi_nonres: 133.43, cpi: 118.8, gdp_deflator: 125.243, remicon: 108200, rebar: 858000, aluminum: 13230.0, copper: 3226.0, basic_above: 2220000.0, basic_below: 1156000.0, standard_cost: 2392000, standard_labor: 279988, oil_brent: 77.74, oil_dubai: 80.79, fx_usd: 1435.4, fx_eur: 1678.48 },
+    { date: '2026-04', ccpi_res: 134.13, ccpi_nonres: 135.48, cpi: 119.37, gdp_deflator: null, remicon: 108200, rebar: 868000, aluminum: 12270.0, copper: 3583.5, basic_above: 2220000.0, basic_below: 1156000.0, standard_cost: 2392000, standard_labor: 279988, oil_brent: 101.16, oil_dubai: 108.9, fx_usd: 1530.5, fx_eur: 1769.33 }
+];
 
         function loadRawData() {
             const stored = localStorage.getItem('hec_dashboard_data_v2');
@@ -2328,24 +2798,24 @@
                 };
             });
         });
-        defaultGuides.ccpi_res.desc = '주거용 건설공사 직접공사비 물가변동을 반영하는 지수로, 아파트·주택의 골조·마감·설비 등 현장 공사비 전반의 상승·하락 폭을 보여 줍니다. 주택 도급계약의 물가연동·에스컬레이션 협상과 변경공사비 산정 시 가장 많이 쓰이는 핵심 잣대입니다.';
-        defaultGuides.ccpi_nonres.desc = '상업·업무·공장·물류 등 비주거 건설공사의 직접공사비 변동을 나타내는 지수입니다. 해당 유형 프로젝트의 도급 단가 조정, 물가변동 보상, 변경계약 시 공사비 증감 근거를 마련할 때 주거용 지수와 구분하여 검토해야 합니다.';
-        defaultGuides.cpi.desc = '소비자물가지수는 생활물가 전반의 변화를 나타내며, 노무비·자재 외 경상비·간접비에 물가연동 조항이 있는 계약에서 공사비 인상 압력을 거시적으로 판단할 때 보조 근거로 활용됩니다. 민간 도급·임대차 연동 조건 검토에도 참고할 수 있습니다.';
-        defaultGuides.gdp_deflator.desc = '건설투자 부문 GDP 디플레이터는 거시경제 차원에서 건설비 물가가 얼마나 오르고 있는지 보여 주는 지표입니다. 장기 사업성 검토, PF·투자 의사결정, 대형 프로젝트의 공사비 추세 가정을 세울 때 건설 전반의 물가 방향을 점검하는 데 씁니다.';
-        defaultGuides.remicon.desc = '레미콘은 철근콘크리트(RC) 공사의 주자재로, 기초·기둥·슬라브 등 구조체 전반에 대량 투입됩니다. 건설공사에 투입되는 재료 가운데 사용량과 단가 비중이 커서 시세 변동이 구조공사 재료비와 공사비 전반에 미치는 영향이 큰 핵심 자재입니다.';
-        defaultGuides.rebar.desc = '철근은 철근콘크리트(RC) 공사의 주자재로, 골조·기초 등 구조체에 톤 단위로 투입되는 재료입니다. 건설공사에 투입되는 재료 중 물량과 단가 규모가 모두 크기 때문에 시세 변동이 구조공사비와 전체 공사비에 끼치는 영향이 매우 큽니다.';
-        defaultGuides.aluminum.desc = '알루미늄 국제가격은 창호·커튼월·천장·외장 판넬 등 알루미늄 기반 마감·설비 자재 원가에 영향을 줍니다. 달러 표시 가격 변동이 수입·가공품 단가로 이어져 마감공사·설비공사비 산정과 적산 검토 시 변동 요인으로 참고합니다.';
-        defaultGuides.copper.desc = '구리 가격은 전선·케이블·배관·전기설비 등 구리 함유 기자재 원가의 선행 변수입니다. 구리 시세 상승은 전기공사·통신·플랜트 설비 공사비와 MEP 관련 간접비까지 확대될 수 있어 설비 비중이 큰 프로젝트에서 중요합니다.';
-        defaultGuides.basic_above.desc = '국토교통부가 분양가상한제 적용 민간분양 주택의 적정 분양가를 산정하기 위해 고시하는 지상층 기준 건축비 단가입니다. 분양가 상한 검토, 사업성 분석, 민간 주택의 건축비 적정성·벤치마킹 시 국가가 제시한 공식 기준으로 활용됩니다.';
-        defaultGuides.basic_below.desc = '국토교통부가 분양가상한제 주택의 지하층(주차·대피공간 등) 건축비를 산정하기 위해 고시하는 기준 단가입니다. 지하 연면적 비중이 큰 주택 사업에서 지상·지하를 합산한 분양가상한 및 건축비 검토 시 국가 고시 기준으로 참고합니다.';
-        defaultGuides.standard_cost.desc = '국토교통부가 공공주택·공공임대·분양전환 임대 등 공공성 주택사업의 건축비 산정, 보조금 지급, 사업비 감사·적정성 검토를 위해 고시하는 표준 단가입니다. 민간 분양과 달리 공공사업의 적정 공사비·사업비를 판단하는 공식 잣대로 쓰입니다.';
-        defaultGuides.standard_labor.desc = '표준노임(일반)은 건설현장 일반직 노무비 산정을 위해 국가·협회가 고시하는 기준 단가입니다. 직접노무비·간접노무비 추정, 하도급 단가 적정성 검토, 인건비 인상이 전체 공사비에 미치는 영향을 평가할 때 핵심 참고 자료입니다.';
-        defaultGuides.oil_brent.desc = '브렌트유 가격은 국제 원유 시세로, 아스팔트·플라스틱·화학자재·해상 운송비 등 2차 자재 원가와 현장 에너지 비용에 영향을 줍니다. 장기적으로 골재·레미콘·플랜트 관련 공사비 인상 압력의 선행 신호로 모니터링합니다.';
-        defaultGuides.oil_dubai.desc = '두바이유는 아시아 수입 비중이 높은 유종 기준 가격으로 국내 유류·석유화학 제품 가격과 밀접합니다. 현장 유류비·가설동 난방·중장비 운영비와 자재 운송비 상승이 공사비에 반영될 때, 국내 원가에 더 가까운 유가 지표로 검토합니다.';
-        defaultGuides.fx_usd.desc = '원/달러 환율은 달러 표시 수입 자재·장비·유가·LME 금속 가격의 원화 환산 원가를 좌우합니다. 환율 상승 시 수입 의존 자재 비중이 큰 프로젝트에서 설비·마감·골조 관련 공사비가 원화 기준으로 증가할 수 있어 달러 계약·ESC 검토에 필수입니다.';
-        defaultGuides.fx_eur.desc = '원/유로 환율은 유럽산 건설기계·전기설비·특수 마감 자재 등 유로 결제 비용의 원화 환산에 영향을 줍니다. 해당 자재·장비 비중이 있는 프로젝트에서 환차에 따른 공사비 변동과 리스크를 점검할 때 보조 지표로 활용합니다.';
+        defaultGuides.ccpi_res.desc = '건축 부문(주거용) 건설공사에 투입되는 직접공사비의 가격 변동을 측정하는 지수입니다. 아파트, 주상복합 등 주거시설의 자재비, 노무비, 장비비 등의 물가 변동을 종합적으로 파악하여 에스컬레이션(ESC) 산정 및 변경계약의 핵심 근거로 활용됩니다.';
+        defaultGuides.ccpi_nonres.desc = '상업용, 업무용, 공장 등 비주거용 건설공사의 직접공사비 변동을 측정하는 지수입니다. 비주거 건축물의 특성상 주거용과는 자재 및 공종 비율이 다르므로, 해당 용도의 프로젝트 공사비 등락 추이를 분석하고 도급 단가를 조정할 때 주로 사용됩니다.';
+        defaultGuides.cpi.desc = '전국 가구가 일상생활을 영위하기 위해 구입하는 상품과 서비스의 가격 변동을 측정하는 거시경제 지표입니다. 공사비 중 현장 관리비, 식대, 기타 경상비의 물가연동분 산정이나 물가 변동의 전반적인 기조를 파악하는 보조 지표로 쓰입니다.';
+        defaultGuides.gdp_deflator.desc = '국가 경제 전체의 건설투자 부문 물가 변동을 나타내는 포괄적인 지수입니다. 건설공사비지수보다 더 넓은 범위(간접비, 부대비용 등 포함)의 물가 추이를 반영하므로, 중장기 건설 사업성 타당성 분석 및 대규모 프로젝트의 거시적 예산 수립에 적합합니다.';
+        defaultGuides.remicon.desc = '철근콘크리트 공사의 핵심 기초 자재인 레미콘(규격: 24-27-15)의 단가입니다. 건설 현장 초기 구조물 공사비의 상당 비중을 차지하며, 시멘트 및 골재 가격 등락에 직접적으로 연동되므로 현장 원가 관리와 주요 자재 수급 계획 시 가장 우선적으로 모니터링해야 합니다.';
+        defaultGuides.rebar.desc = '콘크리트 구조물의 뼈대를 형성하는 철근(규격: 고장력철근 SD400-D10)의 단가입니다. 철스크랩 및 고철 가격 변동에 따라 단가 등락폭이 매우 크며, 토목 및 건축 공사의 구조체 공사비 증감을 결정짓는 가장 중요한 원자재 지표입니다.';
+        defaultGuides.aluminum.desc = '창호, 커튼월, 외장 판넬 등 마감 및 설비 공사에 주로 사용되는 알루미늄의 국제(LME) 시세입니다. 환율 변동과 결합하여 국내 수입 및 가공 단가에 즉각적인 영향을 미치므로, 외장재 비중이 높은 고급 건축물이나 상업 시설의 원가 변동 예측에 필수적입니다.';
+        defaultGuides.copper.desc = '전선, 배관, 각종 전기·통신 설비의 주원료인 구리의 국제(LME) 시세입니다. 플랜트, 하이테크 공장, 스마트 빌딩 등 기전(MEP) 공사 비율이 높은 프로젝트에서 설비 자재비 변동을 예측하고 리스크를 선제적으로 관리하기 위한 선행 지표입니다.';
+        defaultGuides.basic_above.desc = '국토교통부가 분양가상한제 적용 주택의 지상층 적정 건축비를 산정하기 위해 정기적으로 고시하는 기준 단가입니다. 민간 주택사업의 수익성 분석 및 분양가 상한액 산정 시 공식 기준으로 적용되며, 시장 공사비 추이와의 괴리를 파악하는 벤치마크로도 쓰입니다.';
+        defaultGuides.basic_below.desc = '국토교통부가 분양가상한제 주택의 지하층(주차장, 기계실 등) 건축비 상한을 산정하기 위해 고시하는 기준 단가입니다. 지하 심도와 면적이 넓은 최근 건축 트렌드상, 사업 초기 지하 공사비의 적정성을 평가하고 예산을 배분할 때 기준이 됩니다.';
+        defaultGuides.standard_cost.desc = '공공임대주택 등 공공건설 사업의 건축비 산정 및 국민주택기금 지원 기준으로 국토교통부가 고시하는 표준 단가입니다. 민간 건설공사비 지표와 비교하여 공공 사업의 발주 금액 적정성을 검토하고 보조금 산정의 기준점을 잡는 데 활용됩니다.';
+        defaultGuides.standard_labor.desc = '대한건설협회가 조사·공표하는 건설업 직종별 시중노임단가 중 일반 인부의 기준 단가입니다. 현장 직접노무비 산정의 기본값이 되며, 하도급 단가 협상 및 건설업 최저임금 인상 효과를 전체 공사비에 반영할 때 핵심적인 기준 자료가 됩니다.';
+        defaultGuides.oil_brent.desc = '국제 유가의 기준이 되는 브렌트유 시세입니다. 아스팔트, 방수재, 플라스틱 등 석유화학 기반 건설 자재의 제조 원가뿐만 아니라, 해상 운송비 및 글로벌 공급망 비용 전반에 걸친 인상 압력을 중장기적으로 예측하는 데 활용됩니다.';
+        defaultGuides.oil_dubai.desc = '국내 수입 원유의 대부분을 차지하는 두바이유 시세입니다. 현장 내 굴삭기, 덤프 등 중장비 운영에 필요한 경유비와 가설동 난방비, 그리고 자재 내륙 운송비 상승에 직접적인 타격을 주므로 단기 현장 원가 관리 차원에서 밀접하게 추적해야 합니다.';
+        defaultGuides.fx_usd.desc = '원/달러 환율은 달러로 결제되는 수입 자재, 해외 장비, 국제 원자재(LME 등)의 원화 환산 비용을 결정짓는 핵심 변수입니다. 특히 해외 의존도가 높은 마감재 및 특수 설비가 많은 프로젝트에서 환차손 리스크를 방어하고 ESC를 기획할 때 필수적입니다.';
+        defaultGuides.fx_eur.desc = '원/유로 환율은 유럽산 고급 마감재, 특수 기계설비, 시스템 창호 등을 직수입하는 경우 원화 환산 비용에 영향을 미칩니다. 최고급 주거 단지나 특수 목적 건축물 등 유로화 결제 비중이 있는 현장의 원가 변동을 관리하고 조달 리스크를 헤지할 때 참작합니다.';
 
-        const GUIDE_DESC_REVISION = 4;
+        const GUIDE_DESC_REVISION = 5;
         let guideData = JSON.parse(localStorage.getItem('hec_dashboard_guides_v2')) || { ...defaultGuides };
         if (localStorage.getItem('hec_guide_desc_revision') !== String(GUIDE_DESC_REVISION)) {
             INDICATOR_KEYS.forEach(key => {
@@ -2360,8 +2830,8 @@
 
         const defaultPageMeta = {
             chartTitle: '지표별 그래프',
-            chartNote: '기준 연월을 100으로 환산한 상승율 그래프 · 단위 차이로 인한 왜곡 방지',
-            guideTitle: '개략 가이드',
+            chartNote: '기준 연월을 100으로 환산한 상승율 그래프',
+            guideTitle: '가이드',
             guideLead: '적산 및 계약 검토 시 표준 가이드라인 항목입니다.',
             dataMgmtTitle: '데이터관리',
             dataMgmtLead: '16개 지표의 월별 원시 데이터를 직접 입력·업로드하고, 부분삭제·일괄삭제할 수 있습니다.',
@@ -2375,7 +2845,7 @@
             dataApiNote: '건설기술연구원 · 통계청 · 한국은행 연동'
         };
         let pageMeta = { ...defaultPageMeta, ...JSON.parse(localStorage.getItem('hec_dashboard_meta') || '{}') };
-        if (pageMeta.chartNote && pageMeta.chartNote.includes('당초 기점')) {
+        if (pageMeta.chartNote && (pageMeta.chartNote.includes('당초 기점') || pageMeta.chartNote.includes('왜곡 방지'))) {
             pageMeta.chartNote = defaultPageMeta.chartNote;
         }
         if (pageMeta.chartTitle === '물가 지표별 그래프') {
@@ -2500,7 +2970,7 @@
             return `<span class="${cls}">${label} ${sign}${pct}%</span>`;
         }
 
-        window.onload = function() {
+        window.onload = function () {
             lucide.createIcons();
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') closeIndicatorHistory();
@@ -2835,13 +3305,10 @@
         }
 
         function formatDataTableHeader(ind) {
-            if (ind.key === 'gdp_deflator') {
-                return '<span class="th-main">건설투자GDP</span><span class="th-sub">디플레이터</span>';
-            }
             const label = ind.label || '';
-            const parenMatch = label.match(/^(.+?)(\([^)]+\))$/);
-            if (parenMatch) {
-                return `<span class="th-main">${escapeHtml(parenMatch[1])}</span><span class="th-sub">${escapeHtml(parenMatch[2])}</span>`;
+            const parts = label.split('\n');
+            if (parts.length > 1) {
+                return `<span class="th-main">${escapeHtml(parts[0])}</span><span class="th-sub">${escapeHtml(parts[1])}</span>`;
             }
             return `<span class="th-main">${escapeHtml(label)}</span>`;
         }
@@ -3117,13 +3584,21 @@
         }
 
         function setSimUnit(unit) {
+            if (simUnit === unit) return;
+            const prevUnit = simUnit;
             simUnit = unit;
+            
             document.getElementById('sim-unit-krw').classList.toggle('active', unit === 'krw');
             document.getElementById('sim-unit-usd').classList.toggle('active', unit === 'usd');
             document.getElementById('sim-cost-label').textContent =
                 unit === 'krw' ? '계약 공사비 입력 (원)' : '계약 공사비 입력 (USD)';
+            
             const input = document.getElementById('sim-base-cost');
             input.placeholder = unit === 'krw' ? '공사비 입력 (원)' : '공사비 입력 (달러)';
+            
+            // Auto-convert inputted value logic removed as requested by user
+            
+
             document.getElementById('sim-rate-label').textContent = '변동율';
             document.getElementById('sim-final-label').textContent = '변경 공사비';
             document.querySelectorAll('.sim-rate-caption').forEach(el => {
@@ -3132,9 +3607,27 @@
             document.querySelectorAll('.sim-final-caption').forEach(el => {
                 el.textContent = '변경 공사비';
             });
+            
             document.getElementById('sim-fx-meta').classList.toggle('hidden', unit === 'krw');
-            document.getElementById('sim-usd-formula').classList.toggle('hidden', unit === 'krw');
+            
+            const usdFormulaEl = document.getElementById('sim-usd-formula');
+            if(usdFormulaEl) usdFormulaEl.classList.toggle('hidden', unit === 'krw');
+            
             document.querySelectorAll('.sim-extra').forEach(el => el.classList.add('hidden'));
+            
+            // Toggle average block visibility based on unit
+            const avgBlock = document.getElementById('sim-compare-avg');
+            const gridEl = document.querySelector('.sim-results-grid');
+            if (avgBlock) {
+                if (unit === 'usd') {
+                    avgBlock.style.display = 'none';
+                    if (gridEl) gridEl.style.gridTemplateColumns = 'repeat(2, minmax(0, 1fr))';
+                } else {
+                    avgBlock.style.display = '';
+                    if (gridEl) gridEl.style.gridTemplateColumns = 'repeat(3, minmax(0, 1fr))';
+                }
+            }
+            
             calculateEscalation();
         }
 
@@ -3144,44 +3637,30 @@
         }
 
         function renderSimUsdFormula(result1, result2, avgResult, fxRates) {
-            const el = document.getElementById('sim-usd-formula');
-            if (!el || simUnit !== 'usd') return;
-
-            const formulaLine = '달러 공사비: 변동율 = 지표 변동률 (물가연동분만 반영)';
-            const formulaSub = '원화가치 = 달러 공사비 × 해당 시점 환율 (기준·변경 각각 별도 산출)';
-
-            const examples = [result1, result2, avgResult]
-                .filter(r => r.valid)
-                .map(r => {
-                    let krwLine = '<div class="sim-usd-formula-prec-tag">환율 미고시 · 원화가치 산출 불가</div>';
-                    if (r.fxValid && r.krwValueBase != null) {
-                        const diff = r.krwValueDiff >= 0 ? '+' : '';
-                        krwLine = `<div class="sim-usd-formula-prec-tag">원화가치 기준 ${Math.round(r.krwValueBase).toLocaleString()}원 · 변경 ${Math.round(r.krwValueChange).toLocaleString()}원 · 증감 ${diff}${Math.round(r.krwValueDiff).toLocaleString()}원</div>`;
-                    }
-                    const usdLine = r.usdBase != null
-                        ? ` · ${formatUsdAmount(r.usdBase)} → ${formatUsdAmount(r.usdFinal)}`
-                        : '';
-                    return `<div class="sim-usd-formula-ex">
-                        <strong>${r.label}</strong>: ${formatPctSigned(r.rate)}${usdLine}
-                        ${krwLine}
-                    </div>`;
-                })
-                .join('');
-
-            el.innerHTML = `
-                <div class="sim-usd-formula-line">${formulaLine}</div>
-                <div class="sim-usd-formula-sub">${formulaSub}</div>
-                ${examples}`;
+            // Formula rendering completely removed
         }
 
         function renderSimFxMeta(fxRates) {
             const el = document.getElementById('sim-fx-meta');
             if (!el || simUnit !== 'usd') return;
             if (!fxRates) {
-                el.textContent = '환율(원/달러) 미고시 · 원화가치 산출 불가';
+                el.innerHTML = '<div style="text-align:center; font-size:11px; color:var(--muted); margin-top:16px;">환율(원/달러) 미고시 · 원화가치 산출 불가</div>';
                 return;
             }
-            el.textContent = `해외공사 USD계약 · 기준 시점 ${Math.round(fxRates.fxBase).toLocaleString()}원/USD → 변경 시점 ${Math.round(fxRates.fxChange).toLocaleString()}원/USD`;
+            const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`;
+            el.innerHTML = `
+                <div style="display:flex; justify-content:center; align-items:center; gap:12px; font-size:11px; margin-top:16px; color:var(--text); opacity:0.8; letter-spacing:-0.2px;">
+                    <div style="font-weight:700; color:var(--primary); display:flex; align-items:center; gap:4px;">
+                        ${svgIcon} 해외공사 USD계약
+                    </div>
+                    <div style="width:1px; height:10px; background:var(--text); opacity:0.2;"></div>
+                    <div style="display:flex; gap:10px; font-weight:600; align-items:center;">
+                        <div>기준 <span style="font-weight:800; opacity:1;">${Math.round(fxRates.fxBase).toLocaleString()}</span> 원/$</div>
+                        <div style="color:var(--muted); font-weight:400; opacity:0.6;">→</div>
+                        <div>변경 <span style="font-weight:800; opacity:1;">${Math.round(fxRates.fxChange).toLocaleString()}</span> 원/$</div>
+                    </div>
+                </div>
+            `;
         }
 
         function renderEscalationBlock(suffix, result, hasInput) {
@@ -3208,35 +3687,61 @@
                 return;
             }
 
-            if (!hasInput) {
-                const rate = result.rate;
-                const rateText = `${rate >= 0 ? '+' : ''}${rate.toFixed(2)}%`;
-                resetBlock(rateText, '—', '');
-                rateEl.className = rate >= 0 ? 'sim-compare-rate rate-up' : 'sim-compare-rate rate-down';
-                return;
-            }
-
             if (isUsd) {
                 const rate = result.rate;
-                if (rate >= 0) {
-                    rateEl.textContent = `+${rate.toFixed(2)}%`;
-                    rateEl.className = 'sim-compare-rate rate-up';
+                const rateText = `${rate >= 0 ? '+' : ''}${rate.toFixed(2)}%`;
+                const rateClass = rate >= 0 ? 'rate-up' : 'rate-down';
+                let rateHTML = '';
+
+                if (result.fxValid && result.fxBase) {
+                    const fxRate = (result.fxChange - result.fxBase) / result.fxBase * 100;
+                    const fxRateText = `${fxRate >= 0 ? '+' : ''}${fxRate.toFixed(2)}%`;
+                    const fxClass = fxRate >= 0 ? 'rate-up' : 'rate-down';
+                    rateHTML = `
+                        <div style="font-size:12px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:700; color:var(--muted); opacity:0.85;">물가상승</span> <span class="${rateClass}" style="font-size:14px; font-weight:900;">${rateText}</span>
+                        </div>
+                        <div style="font-size:12px; display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:700; color:var(--muted); opacity:0.85;">환차이</span> <span class="${fxClass}" style="font-size:14px; font-weight:900;">${fxRateText}</span>
+                        </div>
+                    `;
                 } else {
-                    rateEl.textContent = `${rate.toFixed(2)}%`;
-                    rateEl.className = 'sim-compare-rate rate-down';
+                    rateHTML = `<span class="${rateClass}">${rateText}</span>`;
                 }
+                
+                rateEl.innerHTML = rateHTML;
+                rateEl.className = 'sim-compare-rate'; 
+
+                if (!hasInput) {
+                    costEl.textContent = '—';
+                    diffEl.textContent = '';
+                    if (extraEl) {
+                        extraEl.textContent = '';
+                        extraEl.className = 'sim-extra hidden';
+                    }
+                    return;
+                }
+
                 costEl.textContent = formatUsdAmount(result.usdFinal);
                 diffEl.textContent = `증감 ${result.usdDiff >= 0 ? '+' : ''}${formatUsdAmount(result.usdDiff)}`;
                 if (extraEl) {
                     if (result.fxValid && result.krwValueBase != null) {
                         const krwDiff = result.krwValueDiff >= 0 ? '+' : '';
-                        extraEl.innerHTML = `원화가치<br>기준 ${Math.round(result.krwValueBase).toLocaleString()}원<br>변경 ${Math.round(result.krwValueChange).toLocaleString()}원<br>증감 ${krwDiff}${Math.round(result.krwValueDiff).toLocaleString()}원`;
+                        extraEl.innerHTML = `<div class="text-xs opacity-75 pt-1 sim-final-caption" style="margin-top:12px;">변경 공사비 <span style="font-size:10px;">(원화 기준)</span></div><div class="sim-compare-cost" style="margin-top:1px;">${Math.round(result.krwValueChange).toLocaleString()} 원</div>`;
                         extraEl.className = 'sim-extra krw-value';
                     } else {
                         extraEl.textContent = '환율 미고시 · 원화가치 산출 불가';
                         extraEl.className = 'sim-extra';
                     }
                 }
+                return;
+            }
+
+            if (!hasInput) {
+                const rate = result.rate;
+                const rateText = `${rate >= 0 ? '+' : ''}${rate.toFixed(2)}%`;
+                resetBlock(rateText, '—', '');
+                rateEl.className = rate >= 0 ? 'sim-compare-rate rate-up' : 'sim-compare-rate rate-down';
                 return;
             }
 
@@ -3249,6 +3754,10 @@
             }
             costEl.textContent = Math.round(result.finalCost).toLocaleString() + ' 원';
             diffEl.textContent = `증감액 ${result.diffCost >= 0 ? '+' : ''}${Math.round(result.diffCost).toLocaleString()} 원`;
+            if (extraEl) {
+                extraEl.textContent = '';
+                extraEl.className = 'sim-extra hidden';
+            }
         }
 
         function calculateEscalation() {
@@ -3639,4 +4148,5 @@
         }
     </script>
 </body>
+
 </html>
