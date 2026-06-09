@@ -716,6 +716,12 @@
             margin-top: 12px;
         }
 
+        @media (max-width: 900px) {
+            .chart-sim-save-row {
+                display: none !important;
+            }
+        }
+
         .chart-sim-save-row .btn-download {
             width: auto;
             min-width: 148px;
@@ -1862,8 +1868,8 @@
                                     </div>
                                     <div>
                                         <label id="sim-cost-label">계약 공사비 입력 (원)</label>
-                                        <input type="number" id="sim-base-cost" value="" oninput="calculateEscalation()"
-                                            placeholder="공사비 입력 (원)">
+                                        <input type="text" id="sim-base-cost" value="" inputmode="numeric" oninput="formatSimCostInput(this); calculateEscalation()"
+                                            placeholder="공사비 입력 (원)" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="sim-result-box" id="sim-results-wrap">
@@ -3667,6 +3673,36 @@
             return '$' + Math.round(val).toLocaleString('en-US');
         }
 
+        function formatKrwAmount(val) {
+            if (val == null || isNaN(val)) return '—';
+            const millions = Math.round(val / 1000000);
+            return millions.toLocaleString() + ' 백만원';
+        }
+
+        /* 콤마 포맷 헬퍼: 숫자 문자열에 천단위 콤마 삽입 */
+        function addCommasToNumber(numStr) {
+            const parts = numStr.split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return parts.join('.');
+        }
+
+        /* 계약공사비 입력칸 콤마 포맷팅 */
+        function formatSimCostInput(el) {
+            const cursor = el.selectionStart;
+            const oldLen = el.value.length;
+            const raw = el.value.replace(/[^\d]/g, '');
+            el.value = raw ? addCommasToNumber(raw) : '';
+            const newLen = el.value.length;
+            const newCursor = Math.max(0, cursor + (newLen - oldLen));
+            el.setSelectionRange(newCursor, newCursor);
+        }
+
+        /* 콤마 포함된 입력값에서 숫자 추출 */
+        function parseSimCostValue() {
+            const raw = document.getElementById('sim-base-cost').value.replace(/,/g, '');
+            return parseFloat(raw) || 0;
+        }
+
         function setSimUnit(unit) {
             if (simUnit === unit) return;
             const prevUnit = simUnit;
@@ -3735,7 +3771,7 @@
             el.innerHTML = `
                 <div style="display:flex; justify-content:center; align-items:center; gap:12px; font-size:11px; margin-top:16px; color:var(--text); opacity:0.8; letter-spacing:-0.2px;">
                     <div style="font-weight:700; color:var(--primary); display:flex; align-items:center; gap:4px;">
-                        ${svgIcon} 해외공사 USD계약
+                        ${svgIcon} 환율 변경
                     </div>
                     <div style="width:1px; height:10px; background:var(--text); opacity:0.2;"></div>
                     <div style="display:flex; gap:10px; font-weight:600; align-items:center;">
@@ -3811,7 +3847,7 @@
                 if (extraEl) {
                     if (result.fxValid && result.krwValueBase != null) {
                         const krwDiff = result.krwValueDiff >= 0 ? '+' : '';
-                        extraEl.innerHTML = `<div class="text-xs opacity-75 pt-1 sim-final-caption" style="margin-top:12px;">변경 공사비 <span style="font-size:10px;">(원화 기준)</span></div><div class="sim-compare-cost" style="margin-top:1px;">${Math.round(result.krwValueChange).toLocaleString()} 원</div>`;
+                        extraEl.innerHTML = `<div class="text-xs opacity-75 pt-1 sim-final-caption" style="margin-top:12px;">변경 공사비 <span style="font-size:10px;">(원화 기준)</span></div><div class="sim-compare-cost" style="margin-top:1px;">${formatKrwAmount(result.krwValueChange)}</div>`;
                         extraEl.className = 'sim-extra krw-value';
                     } else {
                         extraEl.textContent = '환율 미고시 · 원화가치 산출 불가';
@@ -3836,8 +3872,8 @@
                 rateEl.textContent = `${result.rate.toFixed(2)}%`;
                 rateEl.className = 'sim-compare-rate rate-down';
             }
-            costEl.textContent = Math.round(result.finalCost).toLocaleString() + ' 원';
-            diffEl.textContent = `증감액 ${result.diffCost >= 0 ? '+' : ''}${Math.round(result.diffCost).toLocaleString()} 원`;
+            costEl.textContent = formatKrwAmount(result.finalCost);
+            diffEl.textContent = `증감액 ${result.diffCost >= 0 ? '+' : ''}${formatKrwAmount(result.diffCost)}`;
             if (extraEl) {
                 extraEl.textContent = '';
                 extraEl.className = 'sim-extra hidden';
@@ -3847,7 +3883,7 @@
         function calculateEscalation() {
             const sDate = document.getElementById('sim-start-date').value;
             const eDate = document.getElementById('sim-end-date').value;
-            const input = parseFloat(document.getElementById('sim-base-cost').value) || 0;
+            const input = parseSimCostValue();
             const hasInput = input > 0;
             const fxRates = getFxRatesForSim(sDate, eDate);
 
