@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주요 물가지표 통합 모니터링 및 공사비 시뮬레이터</title>
+    <title>통합 모니터링 대시보드</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&display=swap"
@@ -1691,7 +1691,7 @@
         <div class="topbar px-4">
             <div class="brand-chip">
                 <span class="badge">현대건설</span>
-                <strong>주요 물가지표 통합 모니터링</strong>
+                <strong>주요 물가지표 통합 모니터링 대시보드</strong>
             </div>
             <div class="flex items-center gap-2 flex-wrap">
                 <span class="meta-chip">
@@ -1868,8 +1868,7 @@
                         </h3>
                     </div>
                     <div id="guide-section-lead-wrap" class="mb-6">
-                        <p class="text-sm" id="guide-section-lead" style="color: var(--muted);">적산 및 계약 검토 시 표준 가이드라인
-                            항목입니다.</p>
+                        <p class="text-sm" id="guide-section-lead" style="color: var(--muted);"></p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="guide-container"></div>
                 </div>
@@ -1969,7 +1968,7 @@
         </main>
 
         <footer>
-            <p>© 현대건설 주요 물가지표 모니터링 대시보드</p>
+            <p>© 현대건설 주요 물가지표 통합 모니터링 대시보드</p>
             <p class="footer-sources" id="footer-sources"></p>
         </footer>
 
@@ -2693,72 +2692,72 @@
             '#d35400', '#2c3e50', '#c0392b', '#2980b9', '#27ae60', '#9b59b6'
         ];
 
-const defaultRawData = [
-    { date: '2021-01', ccpi_res: 103.8, ccpi_nonres: 104.08, cpi: 101.04, gdp_deflator: 103.036, remicon: 76532, rebar: 700000, aluminum: 7918.5, copper: 2013.5, basic_above: 1678000.0, basic_below: 808000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 51.09, oil_dubai: 52.49, fx_usd: 1088.0, fx_eur: 1331.39 },
-    { date: '2021-02', ccpi_res: 104.29, ccpi_nonres: 104.67, cpi: 101.58, gdp_deflator: 103.036, remicon: 76532, rebar: 730000, aluminum: 7827.0, copper: 1985.5, basic_above: 1678000.0, basic_below: 808000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 56.35, oil_dubai: 55.0, fx_usd: 1117.2, fx_eur: 1354.27 },
-    { date: '2021-03', ccpi_res: 105.28, ccpi_nonres: 105.81, cpi: 101.84, gdp_deflator: 103.036, remicon: 76532, rebar: 780000, aluminum: 9198.0, copper: 2154.5, basic_above: 1693000.0, basic_below: 814000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 63.69, oil_dubai: 64.23, fx_usd: 1121.8, fx_eur: 1351.66 },
-    { date: '2021-04', ccpi_res: 107.58, ccpi_nonres: 108.15, cpi: 101.98, gdp_deflator: 106.009, remicon: 76532, rebar: 780000, aluminum: 8768.0, copper: 2212.5, basic_above: 1693000.0, basic_below: 814000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 64.86, oil_dubai: 61.51, fx_usd: 1132.6, fx_eur: 1327.97 },
-    { date: '2021-05', ccpi_res: 109.51, ccpi_nonres: 110.32, cpi: 102.05, gdp_deflator: 106.009, remicon: 76532, rebar: 840000, aluminum: 9961.0, copper: 2434.5, basic_above: 1693000.0, basic_below: 814000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 67.56, oil_dubai: 64.38, fx_usd: 1109.6, fx_eur: 1334.63 },
-    { date: '2021-06', ccpi_res: 110.73, ccpi_nonres: 111.6, cpi: 102.05, gdp_deflator: 106.009, remicon: 76532, rebar: 910000, aluminum: 10212.5, copper: 2461.5, basic_above: 1693000.0, basic_below: 814000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 70.25, oil_dubai: 69.1, fx_usd: 1113.5, fx_eur: 1361.75 },
-    { date: '2021-07', ccpi_res: 111.78, ccpi_nonres: 112.71, cpi: 102.26, gdp_deflator: 111.124, remicon: 76532, rebar: 970000, aluminum: 9342.0, copper: 2481.0, basic_above: 1723000.0, basic_below: 827999.9999999999, standard_cost: 2048000, standard_labor: 230798, oil_brent: 75.84, oil_dubai: 73.85, fx_usd: 1129.5, fx_eur: 1339.47 },
-    { date: '2021-08', ccpi_res: 113.41, ccpi_nonres: 114.61, cpi: 102.75, gdp_deflator: 111.124, remicon: 76532, rebar: 1000000, aluminum: 9737.0, copper: 2635.0, basic_above: 1723000.0, basic_below: 827999.9999999999, standard_cost: 2048000, standard_labor: 230798, oil_brent: 72.89, oil_dubai: 73.28, fx_usd: 1147.5, fx_eur: 1361.57 },
-    { date: '2021-09', ccpi_res: 114.76, ccpi_nonres: 116.01, cpi: 103.17, gdp_deflator: 111.124, remicon: 76532, rebar: 1000000, aluminum: 9312.0, copper: 2667.5, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2048000, standard_labor: 235815, oil_brent: 71.59, oil_dubai: 70.43, fx_usd: 1162.8, fx_eur: 1373.27 },
-    { date: '2021-10', ccpi_res: 115.89, ccpi_nonres: 117.22, cpi: 103.35, gdp_deflator: 113.434, remicon: 84180, rebar: 1068000, aluminum: 9113.0, copper: 2865.0, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2048000, standard_labor: 235815, oil_brent: 79.28, oil_dubai: 75.68, fx_usd: 1185.2, fx_eur: 1372.28 },
-    { date: '2021-11', ccpi_res: 116.26, ccpi_nonres: 117.64, cpi: 103.87, gdp_deflator: 113.434, remicon: 84180, rebar: 1068000, aluminum: 9875.0, copper: 2713.0, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2048000, standard_labor: 235815, oil_brent: 84.71, oil_dubai: 81.99, fx_usd: 1169.6, fx_eur: 1352.12 },
-    { date: '2021-12', ccpi_res: 116.47, ccpi_nonres: 117.84, cpi: 104.04, gdp_deflator: 113.434, remicon: 84180, rebar: 1070000, aluminum: 9571.0, copper: 2669.5, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2048000, standard_labor: 235815, oil_brent: 68.87, oil_dubai: 71.13, fx_usd: 1187.7, fx_eur: 1346.79 },
-    { date: '2022-01', ccpi_res: 118.85, ccpi_nonres: 120.11, cpi: 104.85, gdp_deflator: 113.769, remicon: 84180, rebar: 1076000, aluminum: 9660.0, copper: 2815.5, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2130000, standard_labor: 242931, oil_brent: 78.98, oil_dubai: 76.88, fx_usd: 1185.5, fx_eur: 1348.33 },
-    { date: '2022-02', ccpi_res: 119.13, ccpi_nonres: 120.36, cpi: 105.42, gdp_deflator: 113.769, remicon: 84180, rebar: 1076000, aluminum: 9701.0, copper: 3072.0, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2130000, standard_labor: 242931, oil_brent: 91.11, oil_dubai: 87.46, fx_usd: 1205.7, fx_eur: 1362.98 },
-    { date: '2022-03', ccpi_res: 120.31, ccpi_nonres: 121.5, cpi: 106.1, gdp_deflator: 113.769, remicon: 84180, rebar: 1095000, aluminum: 9976.0, copper: 3495.5, basic_above: 1829000.0, basic_below: 880000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 104.97, oil_dubai: 98.71, fx_usd: 1205.6, fx_eur: 1341.17 },
-    { date: '2022-04', ccpi_res: 121.99, ccpi_nonres: 123.21, cpi: 106.83, gdp_deflator: 115.623, remicon: 84180, rebar: 1107000, aluminum: 10247.0, copper: 3483.0, basic_above: 1829000.0, basic_below: 880000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 104.39, oil_dubai: 101.61, fx_usd: 1210.7, fx_eur: 1340.55 },
-    { date: '2022-05', ccpi_res: 123.48, ccpi_nonres: 124.72, cpi: 107.5, gdp_deflator: 115.623, remicon: 84180, rebar: 1160000, aluminum: 9511.0, copper: 2911.5, basic_above: 1829000.0, basic_below: 880000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 110.14, oil_dubai: 104.7, fx_usd: 1265.4, fx_eur: 1334.74 },
-    { date: '2022-06', ccpi_res: 123.67, ccpi_nonres: 124.89, cpi: 108.21, gdp_deflator: 115.623, remicon: 95120, rebar: 1185000, aluminum: 9455.0, copper: 2701.5, basic_above: 1829000.0, basic_below: 880000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 116.29, oil_dubai: 112.7, fx_usd: 1238.4, fx_eur: 1319.14 },
-    { date: '2022-07', ccpi_res: 124.08, ccpi_nonres: 125.13, cpi: 108.73, gdp_deflator: 118.375, remicon: 95120, rebar: 1207000, aluminum: 7975.5, copper: 2384.0, basic_above: 1857000.0, basic_below: 894000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 111.63, oil_dubai: 106.34, fx_usd: 1299.8, fx_eur: 1361.87 },
-    { date: '2022-08', ccpi_res: 123.14, ccpi_nonres: 124.35, cpi: 108.63, gdp_deflator: 118.375, remicon: 95120, rebar: 1189000, aluminum: 7930.5, copper: 2469.5, basic_above: 1857000.0, basic_below: 894000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 100.03, oil_dubai: 101.54, fx_usd: 1298.6, fx_eur: 1326.78 },
-    { date: '2022-09', ccpi_res: 124.21, ccpi_nonres: 125.32, cpi: 108.82, gdp_deflator: 118.375, remicon: 95120, rebar: 1035000, aluminum: 7702.0, copper: 2306.0, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2130000, standard_labor: 248819, oil_brent: 92.36, oil_dubai: 93.99, fx_usd: 1345.1, fx_eur: 1351.69 },
-    { date: '2022-10', ccpi_res: 124.24, ccpi_nonres: 125.3, cpi: 109.16, gdp_deflator: 120.062, remicon: 95120, rebar: 1035000, aluminum: 7524.0, copper: 2164.0, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2130000, standard_labor: 248819, oil_brent: 88.86, oil_dubai: 88.28, fx_usd: 1432.1, fx_eur: 1408.18 },
-    { date: '2022-11', ccpi_res: 124.44, ccpi_nonres: 125.4, cpi: 109.07, gdp_deflator: 120.062, remicon: 95120, rebar: 1035000, aluminum: 7745.0, copper: 2245.5, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2130000, standard_labor: 248819, oil_brent: 94.65, oil_dubai: 91.44, fx_usd: 1422.2, fx_eur: 1405.7 },
-    { date: '2022-12', ccpi_res: 124.23, ccpi_nonres: 125.12, cpi: 109.26, gdp_deflator: 120.062, remicon: 95120, rebar: 1035000, aluminum: 8216.5, copper: 2430.5, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2130000, standard_labor: 248819, oil_brent: 86.88, oil_dubai: 81.37, fx_usd: 1320.1, fx_eur: 1375.02 },
-    { date: '2023-01', ccpi_res: 125.98, ccpi_nonres: 126.83, cpi: 110.07, gdp_deflator: 118.751, remicon: 95120, rebar: 1035000, aluminum: 8390.0, copper: 2337.5, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 82.1, oil_dubai: 82.07, fx_usd: 1267.3, fx_eur: 1355.25 },
-    { date: '2023-02', ccpi_res: 126.05, ccpi_nonres: 126.9, cpi: 110.33, gdp_deflator: 118.751, remicon: 99330, rebar: 1035000, aluminum: 9175.0, copper: 2611.0, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 82.84, oil_dubai: 83.6, fx_usd: 1230.8, fx_eur: 1337.02 },
-    { date: '2023-03', ccpi_res: 126.28, ccpi_nonres: 127.09, cpi: 110.52, gdp_deflator: 118.751, remicon: 100350, rebar: 1022000, aluminum: 9066.5, copper: 2364.0, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 84.31, oil_dubai: 82.48, fx_usd: 1319.2, fx_eur: 1407.59 },
-    { date: '2023-04', ccpi_res: 126.4, ccpi_nonres: 127.24, cpi: 110.77, gdp_deflator: 118.451, remicon: 105100, rebar: 1035000, aluminum: 8966.0, copper: 2380.5, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 84.93, oil_dubai: 84.1, fx_usd: 1295.4, fx_eur: 1401.23 },
-    { date: '2023-05', ccpi_res: 126.49, ccpi_nonres: 127.27, cpi: 111.13, gdp_deflator: 118.451, remicon: 105100, rebar: 1043000, aluminum: 8573.0, copper: 2353.0, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 75.32, oil_dubai: 78.61, fx_usd: 1339.1, fx_eur: 1469.33 },
-    { date: '2023-06', ccpi_res: 126.51, ccpi_nonres: 127.36, cpi: 111.16, gdp_deflator: 118.451, remicon: 105100, rebar: 1043000, aluminum: 8210.5, copper: 2281.0, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 74.28, oil_dubai: 71.66, fx_usd: 1321.6, fx_eur: 1413.39 },
-    { date: '2023-07', ccpi_res: 126.34, ccpi_nonres: 127.19, cpi: 111.29, gdp_deflator: 122.061, remicon: 105100, rebar: 1043000, aluminum: 8355.0, copper: 2107.0, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 74.65, oil_dubai: 75.21, fx_usd: 1319.4, fx_eur: 1439.47 },
-    { date: '2023-08', ccpi_res: 126.33, ccpi_nonres: 127.19, cpi: 112.28, gdp_deflator: 122.061, remicon: 105100, rebar: 1043000, aluminum: 8720.5, copper: 2217.0, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 84.91, oil_dubai: 85.85, fx_usd: 1273.8, fx_eur: 1401.12 },
-    { date: '2023-09', ccpi_res: 128.33, ccpi_nonres: 129.09, cpi: 112.85, gdp_deflator: 122.061, remicon: 105100, rebar: 1043000, aluminum: 8515.0, copper: 2184.0, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2257000, standard_labor: 265516, oil_brent: 89.0, oil_dubai: 89.47, fx_usd: 1322.3, fx_eur: 1433.77 },
-    { date: '2023-10', ccpi_res: 128.15, ccpi_nonres: 128.9, cpi: 113.27, gdp_deflator: 122.265, remicon: 105100, rebar: 1043000, aluminum: 8100.5, copper: 2286.5, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2257000, standard_labor: 265516, oil_brent: 90.71, oil_dubai: 93.12, fx_usd: 1351.3, fx_eur: 1414.2 },
-    { date: '2023-11', ccpi_res: 127.99, ccpi_nonres: 128.7, cpi: 112.68, gdp_deflator: 122.265, remicon: 105100, rebar: 1043000, aluminum: 8041.0, copper: 2230.5, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2257000, standard_labor: 265516, oil_brent: 84.63, oil_dubai: 86.25, fx_usd: 1349.6, fx_eur: 1427.88 },
-    { date: '2023-12', ccpi_res: 127.87, ccpi_nonres: 128.58, cpi: 112.73, gdp_deflator: 122.265, remicon: 105100, rebar: 1021000, aluminum: 8456.0, copper: 2147.5, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2257000, standard_labor: 265516, oil_brent: 78.88, oil_dubai: 81.31, fx_usd: 1290.4, fx_eur: 1405.37 },
-    { date: '2024-01', ccpi_res: 128.93, ccpi_nonres: 129.52, cpi: 113.17, gdp_deflator: 121.811, remicon: 105100, rebar: 1011000, aluminum: 8430.0, copper: 2336.5, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2319000, standard_labor: 270789, oil_brent: 75.89, oil_dubai: 78.1, fx_usd: 1289.4, fx_eur: 1423.63 },
-    { date: '2024-02', ccpi_res: 129.21, ccpi_nonres: 129.77, cpi: 113.78, gdp_deflator: 121.811, remicon: 105100, rebar: 998000, aluminum: 8437.0, copper: 2212.5, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2319000, standard_labor: 270789, oil_brent: 78.7, oil_dubai: 80.31, fx_usd: 1333.5, fx_eur: 1442.11 },
-    { date: '2024-03', ccpi_res: 129.14, ccpi_nonres: 129.74, cpi: 113.95, gdp_deflator: 121.811, remicon: 110980, rebar: 998000, aluminum: 8394.0, copper: 2183.5, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 83.55, oil_dubai: 81.55, fx_usd: 1334.1, fx_eur: 1446.56 },
-    { date: '2024-04', ccpi_res: 129.1, ccpi_nonres: 129.71, cpi: 114.01, gdp_deflator: 120.161, remicon: 110980, rebar: 998000, aluminum: 8920.0, copper: 2322.5, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 87.42, oil_dubai: 87.65, fx_usd: 1347.4, fx_eur: 1453.44 },
-    { date: '2024-05', ccpi_res: 129.08, ccpi_nonres: 129.74, cpi: 114.1, gdp_deflator: 120.161, remicon: 110980, rebar: 998000, aluminum: 9791.0, copper: 2554.5, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 83.67, oil_dubai: 84.52, fx_usd: 1378.0, fx_eur: 1476.46 },
-    { date: '2024-06', ccpi_res: 128.95, ccpi_nonres: 129.62, cpi: 113.84, gdp_deflator: 120.161, remicon: 110980, rebar: 948000, aluminum: 9985.5, copper: 2625.0, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 78.36, oil_dubai: 81.91, fx_usd: 1381.6, fx_eur: 1499.17 },
-    { date: '2024-07', ccpi_res: 128.79, ccpi_nonres: 129.5, cpi: 114.13, gdp_deflator: 123.054, remicon: 110980, rebar: 908000, aluminum: 9517.0, copper: 2496.5, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 86.6, oil_dubai: 85.65, fx_usd: 1382.4, fx_eur: 1484.35 },
-    { date: '2024-08', ccpi_res: 128.7, ccpi_nonres: 129.34, cpi: 114.54, gdp_deflator: 123.054, remicon: 110980, rebar: 888000, aluminum: 8998.0, copper: 2228.5, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 79.52, oil_dubai: 80.53, fx_usd: 1380.1, fx_eur: 1493.75 },
-    { date: '2024-09', ccpi_res: 129.43, ccpi_nonres: 130.02, cpi: 114.65, gdp_deflator: 123.054, remicon: 110980, rebar: 918000, aluminum: 9034.0, copper: 2390.5, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2319000, standard_labor: 274286, oil_brent: 77.52, oil_dubai: 76.48, fx_usd: 1334.8, fx_eur: 1474.35 },
-    { date: '2024-10', ccpi_res: 129.23, ccpi_nonres: 129.85, cpi: 114.69, gdp_deflator: 123.362, remicon: 110980, rebar: 938000, aluminum: 9741.0, copper: 2635.0, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2319000, standard_labor: 274286, oil_brent: 73.56, oil_dubai: 70.76, fx_usd: 1306.9, fx_eur: 1446.15 },
-    { date: '2024-11', ccpi_res: 129.17, ccpi_nonres: 129.75, cpi: 114.4, gdp_deflator: 123.362, remicon: 110980, rebar: 908000, aluminum: 9425.0, copper: 2613.5, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2319000, standard_labor: 274286, oil_brent: 73.1, oil_dubai: 73.56, fx_usd: 1379.3, fx_eur: 1501.44 },
-    { date: '2024-12', ccpi_res: 129.01, ccpi_nonres: 129.61, cpi: 114.91, gdp_deflator: 123.362, remicon: 110980, rebar: 858000, aluminum: 8871.0, copper: 2564.5, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2319000, standard_labor: 274286, oil_brent: 71.83, oil_dubai: 72.11, fx_usd: 1395.1, fx_eur: 1471.9 },
-    { date: '2025-01', ccpi_res: 129.88, ccpi_nonres: 130.47, cpi: 115.71, gdp_deflator: 122.316, remicon: 110980, rebar: 848000, aluminum: 8685.5, copper: 2536.0, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 75.93, oil_dubai: 75.18, fx_usd: 1470.0, fx_eur: 1521.96 },
-    { date: '2025-02', ccpi_res: 129.85, ccpi_nonres: 130.44, cpi: 116.08, gdp_deflator: 122.316, remicon: 110980, rebar: 838000, aluminum: 8866.5, copper: 2584.0, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 75.96, oil_dubai: 79.04, fx_usd: 1453.0, fx_eur: 1491.5 },
-    { date: '2025-03', ccpi_res: 129.8, ccpi_nonres: 130.53, cpi: 116.29, gdp_deflator: 122.316, remicon: 110980, rebar: 838000, aluminum: 9360.5, copper: 2624.0, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 71.62, oil_dubai: 73.23, fx_usd: 1458.7, fx_eur: 1529.37 },
-    { date: '2025-04', ccpi_res: 129.81, ccpi_nonres: 130.53, cpi: 116.38, gdp_deflator: 120.638, remicon: 110980, rebar: 818000, aluminum: 9652.0, copper: 2499.0, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 74.49, oil_dubai: 75.97, fx_usd: 1470.6, fx_eur: 1590.9 },
-    { date: '2025-05', ccpi_res: 129.82, ccpi_nonres: 130.56, cpi: 116.27, gdp_deflator: 120.638, remicon: 108200, rebar: 838000, aluminum: 9195.0, copper: 2377.5, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 61.29, oil_dubai: 62.0, fx_usd: 1426.9, fx_eur: 1611.54 },
-    { date: '2025-06', ccpi_res: 129.82, ccpi_nonres: 130.59, cpi: 116.31, gdp_deflator: 120.638, remicon: 108200, rebar: 858000, aluminum: 9655.0, copper: 2451.0, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 64.63, oil_dubai: 63.93, fx_usd: 1375.7, fx_eur: 1562.73 },
-    { date: '2025-07', ccpi_res: 129.85, ccpi_nonres: 130.59, cpi: 116.52, gdp_deflator: 124.093, remicon: 108200, rebar: 828000, aluminum: 10061.0, copper: 2604.0, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 67.11, oil_dubai: 68.16, fx_usd: 1353.6, fx_eur: 1595.42 },
-    { date: '2025-08', ccpi_res: 129.72, ccpi_nonres: 130.48, cpi: 116.45, gdp_deflator: 124.093, remicon: 108200, rebar: 828000, aluminum: 9535.5, copper: 2545.0, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 69.67, oil_dubai: 73.75, fx_usd: 1390.4, fx_eur: 1588.18 },
-    { date: '2025-09', ccpi_res: 130.32, ccpi_nonres: 131.19, cpi: 117.06, gdp_deflator: 124.093, remicon: 108200, rebar: 828000, aluminum: 9804.5, copper: 2612.5, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2380000, standard_labor: 278832, oil_brent: 68.15, oil_dubai: 70.72, fx_usd: 1387.7, fx_eur: 1621.87 },
-    { date: '2025-10', ccpi_res: 130.43, ccpi_nonres: 131.33, cpi: 117.42, gdp_deflator: 124.465, remicon: 108200, rebar: 798000, aluminum: 10263.0, copper: 2683.5, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2380000, standard_labor: 278832, oil_brent: 65.35, oil_dubai: 66.56, fx_usd: 1403.2, fx_eur: 1647.71 },
-    { date: '2025-11', ccpi_res: 130.73, ccpi_nonres: 131.72, cpi: 117.2, gdp_deflator: 124.465, remicon: 108200, rebar: 798000, aluminum: 10872.5, copper: 2903.0, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2380000, standard_labor: 278832, oil_brent: 64.89, oil_dubai: 66.69, fx_usd: 1427.4, fx_eur: 1646.72 },
-    { date: '2025-12', ccpi_res: 130.76, ccpi_nonres: 131.83, cpi: 117.57, gdp_deflator: 124.465, remicon: 108200, rebar: 788000, aluminum: 11299.0, copper: 2860.0, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2380000, standard_labor: 278832, oil_brent: 63.17, oil_dubai: 64.26, fx_usd: 1465.9, fx_eur: 1701.18 },
-    { date: '2026-01', ccpi_res: 131.36, ccpi_nonres: 132.5, cpi: 118.03, gdp_deflator: 125.243, remicon: 108200, rebar: 768000, aluminum: 12571.0, copper: 2986.0, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2392000, standard_labor: 279988, oil_brent: 60.75, oil_dubai: 60.32, fx_usd: 1434.9, fx_eur: 1685.72 },
-    { date: '2026-02', ccpi_res: 131.56, ccpi_nonres: 132.69, cpi: 118.4, gdp_deflator: 125.243, remicon: 108200, rebar: 828000, aluminum: 12987.0, copper: 3042.0, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2392000, standard_labor: 279988, oil_brent: 66.3, oil_dubai: 64.98, fx_usd: 1436.7, fx_eur: 1701.2 },
-    { date: '2026-03', ccpi_res: 132.27, ccpi_nonres: 133.43, cpi: 118.8, gdp_deflator: 125.243, remicon: 108200, rebar: 858000, aluminum: 13230.0, copper: 3226.0, basic_above: 2220000.0, basic_below: 1156000.0, standard_cost: 2392000, standard_labor: 279988, oil_brent: 77.74, oil_dubai: 80.79, fx_usd: 1435.4, fx_eur: 1678.48 },
-    { date: '2026-04', ccpi_res: 134.13, ccpi_nonres: 135.48, cpi: 119.37, gdp_deflator: null, remicon: 108200, rebar: 868000, aluminum: 12270.0, copper: 3583.5, basic_above: 2220000.0, basic_below: 1156000.0, standard_cost: 2392000, standard_labor: 279988, oil_brent: 101.16, oil_dubai: 108.9, fx_usd: 1530.5, fx_eur: 1769.33 }
-];
+        const defaultRawData = [
+            { date: '2021-01', ccpi_res: 103.8, ccpi_nonres: 104.08, cpi: 101.04, gdp_deflator: 103.036, remicon: 76532, rebar: 700000, aluminum: 7918.5, copper: 2013.5, basic_above: 1678000.0, basic_below: 808000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 51.09, oil_dubai: 52.49, fx_usd: 1088.0, fx_eur: 1331.39 },
+            { date: '2021-02', ccpi_res: 104.29, ccpi_nonres: 104.67, cpi: 101.58, gdp_deflator: 103.036, remicon: 76532, rebar: 730000, aluminum: 7827.0, copper: 1985.5, basic_above: 1678000.0, basic_below: 808000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 56.35, oil_dubai: 55.0, fx_usd: 1117.2, fx_eur: 1354.27 },
+            { date: '2021-03', ccpi_res: 105.28, ccpi_nonres: 105.81, cpi: 101.84, gdp_deflator: 103.036, remicon: 76532, rebar: 780000, aluminum: 9198.0, copper: 2154.5, basic_above: 1693000.0, basic_below: 814000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 63.69, oil_dubai: 64.23, fx_usd: 1121.8, fx_eur: 1351.66 },
+            { date: '2021-04', ccpi_res: 107.58, ccpi_nonres: 108.15, cpi: 101.98, gdp_deflator: 106.009, remicon: 76532, rebar: 780000, aluminum: 8768.0, copper: 2212.5, basic_above: 1693000.0, basic_below: 814000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 64.86, oil_dubai: 61.51, fx_usd: 1132.6, fx_eur: 1327.97 },
+            { date: '2021-05', ccpi_res: 109.51, ccpi_nonres: 110.32, cpi: 102.05, gdp_deflator: 106.009, remicon: 76532, rebar: 840000, aluminum: 9961.0, copper: 2434.5, basic_above: 1693000.0, basic_below: 814000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 67.56, oil_dubai: 64.38, fx_usd: 1109.6, fx_eur: 1334.63 },
+            { date: '2021-06', ccpi_res: 110.73, ccpi_nonres: 111.6, cpi: 102.05, gdp_deflator: 106.009, remicon: 76532, rebar: 910000, aluminum: 10212.5, copper: 2461.5, basic_above: 1693000.0, basic_below: 814000.0, standard_cost: 2048000, standard_labor: 230798, oil_brent: 70.25, oil_dubai: 69.1, fx_usd: 1113.5, fx_eur: 1361.75 },
+            { date: '2021-07', ccpi_res: 111.78, ccpi_nonres: 112.71, cpi: 102.26, gdp_deflator: 111.124, remicon: 76532, rebar: 970000, aluminum: 9342.0, copper: 2481.0, basic_above: 1723000.0, basic_below: 827999.9999999999, standard_cost: 2048000, standard_labor: 230798, oil_brent: 75.84, oil_dubai: 73.85, fx_usd: 1129.5, fx_eur: 1339.47 },
+            { date: '2021-08', ccpi_res: 113.41, ccpi_nonres: 114.61, cpi: 102.75, gdp_deflator: 111.124, remicon: 76532, rebar: 1000000, aluminum: 9737.0, copper: 2635.0, basic_above: 1723000.0, basic_below: 827999.9999999999, standard_cost: 2048000, standard_labor: 230798, oil_brent: 72.89, oil_dubai: 73.28, fx_usd: 1147.5, fx_eur: 1361.57 },
+            { date: '2021-09', ccpi_res: 114.76, ccpi_nonres: 116.01, cpi: 103.17, gdp_deflator: 111.124, remicon: 76532, rebar: 1000000, aluminum: 9312.0, copper: 2667.5, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2048000, standard_labor: 235815, oil_brent: 71.59, oil_dubai: 70.43, fx_usd: 1162.8, fx_eur: 1373.27 },
+            { date: '2021-10', ccpi_res: 115.89, ccpi_nonres: 117.22, cpi: 103.35, gdp_deflator: 113.434, remicon: 84180, rebar: 1068000, aluminum: 9113.0, copper: 2865.0, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2048000, standard_labor: 235815, oil_brent: 79.28, oil_dubai: 75.68, fx_usd: 1185.2, fx_eur: 1372.28 },
+            { date: '2021-11', ccpi_res: 116.26, ccpi_nonres: 117.64, cpi: 103.87, gdp_deflator: 113.434, remicon: 84180, rebar: 1068000, aluminum: 9875.0, copper: 2713.0, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2048000, standard_labor: 235815, oil_brent: 84.71, oil_dubai: 81.99, fx_usd: 1169.6, fx_eur: 1352.12 },
+            { date: '2021-12', ccpi_res: 116.47, ccpi_nonres: 117.84, cpi: 104.04, gdp_deflator: 113.434, remicon: 84180, rebar: 1070000, aluminum: 9571.0, copper: 2669.5, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2048000, standard_labor: 235815, oil_brent: 68.87, oil_dubai: 71.13, fx_usd: 1187.7, fx_eur: 1346.79 },
+            { date: '2022-01', ccpi_res: 118.85, ccpi_nonres: 120.11, cpi: 104.85, gdp_deflator: 113.769, remicon: 84180, rebar: 1076000, aluminum: 9660.0, copper: 2815.5, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2130000, standard_labor: 242931, oil_brent: 78.98, oil_dubai: 76.88, fx_usd: 1185.5, fx_eur: 1348.33 },
+            { date: '2022-02', ccpi_res: 119.13, ccpi_nonres: 120.36, cpi: 105.42, gdp_deflator: 113.769, remicon: 84180, rebar: 1076000, aluminum: 9701.0, copper: 3072.0, basic_above: 1782000.0, basic_below: 857999.9999999999, standard_cost: 2130000, standard_labor: 242931, oil_brent: 91.11, oil_dubai: 87.46, fx_usd: 1205.7, fx_eur: 1362.98 },
+            { date: '2022-03', ccpi_res: 120.31, ccpi_nonres: 121.5, cpi: 106.1, gdp_deflator: 113.769, remicon: 84180, rebar: 1095000, aluminum: 9976.0, copper: 3495.5, basic_above: 1829000.0, basic_below: 880000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 104.97, oil_dubai: 98.71, fx_usd: 1205.6, fx_eur: 1341.17 },
+            { date: '2022-04', ccpi_res: 121.99, ccpi_nonres: 123.21, cpi: 106.83, gdp_deflator: 115.623, remicon: 84180, rebar: 1107000, aluminum: 10247.0, copper: 3483.0, basic_above: 1829000.0, basic_below: 880000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 104.39, oil_dubai: 101.61, fx_usd: 1210.7, fx_eur: 1340.55 },
+            { date: '2022-05', ccpi_res: 123.48, ccpi_nonres: 124.72, cpi: 107.5, gdp_deflator: 115.623, remicon: 84180, rebar: 1160000, aluminum: 9511.0, copper: 2911.5, basic_above: 1829000.0, basic_below: 880000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 110.14, oil_dubai: 104.7, fx_usd: 1265.4, fx_eur: 1334.74 },
+            { date: '2022-06', ccpi_res: 123.67, ccpi_nonres: 124.89, cpi: 108.21, gdp_deflator: 115.623, remicon: 95120, rebar: 1185000, aluminum: 9455.0, copper: 2701.5, basic_above: 1829000.0, basic_below: 880000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 116.29, oil_dubai: 112.7, fx_usd: 1238.4, fx_eur: 1319.14 },
+            { date: '2022-07', ccpi_res: 124.08, ccpi_nonres: 125.13, cpi: 108.73, gdp_deflator: 118.375, remicon: 95120, rebar: 1207000, aluminum: 7975.5, copper: 2384.0, basic_above: 1857000.0, basic_below: 894000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 111.63, oil_dubai: 106.34, fx_usd: 1299.8, fx_eur: 1361.87 },
+            { date: '2022-08', ccpi_res: 123.14, ccpi_nonres: 124.35, cpi: 108.63, gdp_deflator: 118.375, remicon: 95120, rebar: 1189000, aluminum: 7930.5, copper: 2469.5, basic_above: 1857000.0, basic_below: 894000.0, standard_cost: 2130000, standard_labor: 242931, oil_brent: 100.03, oil_dubai: 101.54, fx_usd: 1298.6, fx_eur: 1326.78 },
+            { date: '2022-09', ccpi_res: 124.21, ccpi_nonres: 125.32, cpi: 108.82, gdp_deflator: 118.375, remicon: 95120, rebar: 1035000, aluminum: 7702.0, copper: 2306.0, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2130000, standard_labor: 248819, oil_brent: 92.36, oil_dubai: 93.99, fx_usd: 1345.1, fx_eur: 1351.69 },
+            { date: '2022-10', ccpi_res: 124.24, ccpi_nonres: 125.3, cpi: 109.16, gdp_deflator: 120.062, remicon: 95120, rebar: 1035000, aluminum: 7524.0, copper: 2164.0, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2130000, standard_labor: 248819, oil_brent: 88.86, oil_dubai: 88.28, fx_usd: 1432.1, fx_eur: 1408.18 },
+            { date: '2022-11', ccpi_res: 124.44, ccpi_nonres: 125.4, cpi: 109.07, gdp_deflator: 120.062, remicon: 95120, rebar: 1035000, aluminum: 7745.0, copper: 2245.5, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2130000, standard_labor: 248819, oil_brent: 94.65, oil_dubai: 91.44, fx_usd: 1422.2, fx_eur: 1405.7 },
+            { date: '2022-12', ccpi_res: 124.23, ccpi_nonres: 125.12, cpi: 109.26, gdp_deflator: 120.062, remicon: 95120, rebar: 1035000, aluminum: 8216.5, copper: 2430.5, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2130000, standard_labor: 248819, oil_brent: 86.88, oil_dubai: 81.37, fx_usd: 1320.1, fx_eur: 1375.02 },
+            { date: '2023-01', ccpi_res: 125.98, ccpi_nonres: 126.83, cpi: 110.07, gdp_deflator: 118.751, remicon: 95120, rebar: 1035000, aluminum: 8390.0, copper: 2337.5, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 82.1, oil_dubai: 82.07, fx_usd: 1267.3, fx_eur: 1355.25 },
+            { date: '2023-02', ccpi_res: 126.05, ccpi_nonres: 126.9, cpi: 110.33, gdp_deflator: 118.751, remicon: 99330, rebar: 1035000, aluminum: 9175.0, copper: 2611.0, basic_above: 1882999.9999999998, basic_below: 916000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 82.84, oil_dubai: 83.6, fx_usd: 1230.8, fx_eur: 1337.02 },
+            { date: '2023-03', ccpi_res: 126.28, ccpi_nonres: 127.09, cpi: 110.52, gdp_deflator: 118.751, remicon: 100350, rebar: 1022000, aluminum: 9066.5, copper: 2364.0, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 84.31, oil_dubai: 82.48, fx_usd: 1319.2, fx_eur: 1407.59 },
+            { date: '2023-04', ccpi_res: 126.4, ccpi_nonres: 127.24, cpi: 110.77, gdp_deflator: 118.451, remicon: 105100, rebar: 1035000, aluminum: 8966.0, copper: 2380.5, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 84.93, oil_dubai: 84.1, fx_usd: 1295.4, fx_eur: 1401.23 },
+            { date: '2023-05', ccpi_res: 126.49, ccpi_nonres: 127.27, cpi: 111.13, gdp_deflator: 118.451, remicon: 105100, rebar: 1043000, aluminum: 8573.0, copper: 2353.0, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 75.32, oil_dubai: 78.61, fx_usd: 1339.1, fx_eur: 1469.33 },
+            { date: '2023-06', ccpi_res: 126.51, ccpi_nonres: 127.36, cpi: 111.16, gdp_deflator: 118.451, remicon: 105100, rebar: 1043000, aluminum: 8210.5, copper: 2281.0, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 74.28, oil_dubai: 71.66, fx_usd: 1321.6, fx_eur: 1413.39 },
+            { date: '2023-07', ccpi_res: 126.34, ccpi_nonres: 127.19, cpi: 111.29, gdp_deflator: 122.061, remicon: 105100, rebar: 1043000, aluminum: 8355.0, copper: 2107.0, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 74.65, oil_dubai: 75.21, fx_usd: 1319.4, fx_eur: 1439.47 },
+            { date: '2023-08', ccpi_res: 126.33, ccpi_nonres: 127.19, cpi: 112.28, gdp_deflator: 122.061, remicon: 105100, rebar: 1043000, aluminum: 8720.5, copper: 2217.0, basic_above: 1942999.9999999998, basic_below: 933000.0, standard_cost: 2257000, standard_labor: 255426, oil_brent: 84.91, oil_dubai: 85.85, fx_usd: 1273.8, fx_eur: 1401.12 },
+            { date: '2023-09', ccpi_res: 128.33, ccpi_nonres: 129.09, cpi: 112.85, gdp_deflator: 122.061, remicon: 105100, rebar: 1043000, aluminum: 8515.0, copper: 2184.0, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2257000, standard_labor: 265516, oil_brent: 89.0, oil_dubai: 89.47, fx_usd: 1322.3, fx_eur: 1433.77 },
+            { date: '2023-10', ccpi_res: 128.15, ccpi_nonres: 128.9, cpi: 113.27, gdp_deflator: 122.265, remicon: 105100, rebar: 1043000, aluminum: 8100.5, copper: 2286.5, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2257000, standard_labor: 265516, oil_brent: 90.71, oil_dubai: 93.12, fx_usd: 1351.3, fx_eur: 1414.2 },
+            { date: '2023-11', ccpi_res: 127.99, ccpi_nonres: 128.7, cpi: 112.68, gdp_deflator: 122.265, remicon: 105100, rebar: 1043000, aluminum: 8041.0, copper: 2230.5, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2257000, standard_labor: 265516, oil_brent: 84.63, oil_dubai: 86.25, fx_usd: 1349.6, fx_eur: 1427.88 },
+            { date: '2023-12', ccpi_res: 127.87, ccpi_nonres: 128.58, cpi: 112.73, gdp_deflator: 122.265, remicon: 105100, rebar: 1021000, aluminum: 8456.0, copper: 2147.5, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2257000, standard_labor: 265516, oil_brent: 78.88, oil_dubai: 81.31, fx_usd: 1290.4, fx_eur: 1405.37 },
+            { date: '2024-01', ccpi_res: 128.93, ccpi_nonres: 129.52, cpi: 113.17, gdp_deflator: 121.811, remicon: 105100, rebar: 1011000, aluminum: 8430.0, copper: 2336.5, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2319000, standard_labor: 270789, oil_brent: 75.89, oil_dubai: 78.1, fx_usd: 1289.4, fx_eur: 1423.63 },
+            { date: '2024-02', ccpi_res: 129.21, ccpi_nonres: 129.77, cpi: 113.78, gdp_deflator: 121.811, remicon: 105100, rebar: 998000, aluminum: 8437.0, copper: 2212.5, basic_above: 1975999.9999999998, basic_below: 947000.0, standard_cost: 2319000, standard_labor: 270789, oil_brent: 78.7, oil_dubai: 80.31, fx_usd: 1333.5, fx_eur: 1442.11 },
+            { date: '2024-03', ccpi_res: 129.14, ccpi_nonres: 129.74, cpi: 113.95, gdp_deflator: 121.811, remicon: 110980, rebar: 998000, aluminum: 8394.0, copper: 2183.5, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 83.55, oil_dubai: 81.55, fx_usd: 1334.1, fx_eur: 1446.56 },
+            { date: '2024-04', ccpi_res: 129.1, ccpi_nonres: 129.71, cpi: 114.01, gdp_deflator: 120.161, remicon: 110980, rebar: 998000, aluminum: 8920.0, copper: 2322.5, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 87.42, oil_dubai: 87.65, fx_usd: 1347.4, fx_eur: 1453.44 },
+            { date: '2024-05', ccpi_res: 129.08, ccpi_nonres: 129.74, cpi: 114.1, gdp_deflator: 120.161, remicon: 110980, rebar: 998000, aluminum: 9791.0, copper: 2554.5, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 83.67, oil_dubai: 84.52, fx_usd: 1378.0, fx_eur: 1476.46 },
+            { date: '2024-06', ccpi_res: 128.95, ccpi_nonres: 129.62, cpi: 113.84, gdp_deflator: 120.161, remicon: 110980, rebar: 948000, aluminum: 9985.5, copper: 2625.0, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 78.36, oil_dubai: 81.91, fx_usd: 1381.6, fx_eur: 1499.17 },
+            { date: '2024-07', ccpi_res: 128.79, ccpi_nonres: 129.5, cpi: 114.13, gdp_deflator: 123.054, remicon: 110980, rebar: 908000, aluminum: 9517.0, copper: 2496.5, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 86.6, oil_dubai: 85.65, fx_usd: 1382.4, fx_eur: 1484.35 },
+            { date: '2024-08', ccpi_res: 128.7, ccpi_nonres: 129.34, cpi: 114.54, gdp_deflator: 123.054, remicon: 110980, rebar: 888000, aluminum: 8998.0, copper: 2228.5, basic_above: 2038000.0, basic_below: 975999.9999999999, standard_cost: 2319000, standard_labor: 270789, oil_brent: 79.52, oil_dubai: 80.53, fx_usd: 1380.1, fx_eur: 1493.75 },
+            { date: '2024-09', ccpi_res: 129.43, ccpi_nonres: 130.02, cpi: 114.65, gdp_deflator: 123.054, remicon: 110980, rebar: 918000, aluminum: 9034.0, copper: 2390.5, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2319000, standard_labor: 274286, oil_brent: 77.52, oil_dubai: 76.48, fx_usd: 1334.8, fx_eur: 1474.35 },
+            { date: '2024-10', ccpi_res: 129.23, ccpi_nonres: 129.85, cpi: 114.69, gdp_deflator: 123.362, remicon: 110980, rebar: 938000, aluminum: 9741.0, copper: 2635.0, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2319000, standard_labor: 274286, oil_brent: 73.56, oil_dubai: 70.76, fx_usd: 1306.9, fx_eur: 1446.15 },
+            { date: '2024-11', ccpi_res: 129.17, ccpi_nonres: 129.75, cpi: 114.4, gdp_deflator: 123.362, remicon: 110980, rebar: 908000, aluminum: 9425.0, copper: 2613.5, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2319000, standard_labor: 274286, oil_brent: 73.1, oil_dubai: 73.56, fx_usd: 1379.3, fx_eur: 1501.44 },
+            { date: '2024-12', ccpi_res: 129.01, ccpi_nonres: 129.61, cpi: 114.91, gdp_deflator: 123.362, remicon: 110980, rebar: 858000, aluminum: 8871.0, copper: 2564.5, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2319000, standard_labor: 274286, oil_brent: 71.83, oil_dubai: 72.11, fx_usd: 1395.1, fx_eur: 1471.9 },
+            { date: '2025-01', ccpi_res: 129.88, ccpi_nonres: 130.47, cpi: 115.71, gdp_deflator: 122.316, remicon: 110980, rebar: 848000, aluminum: 8685.5, copper: 2536.0, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 75.93, oil_dubai: 75.18, fx_usd: 1470.0, fx_eur: 1521.96 },
+            { date: '2025-02', ccpi_res: 129.85, ccpi_nonres: 130.44, cpi: 116.08, gdp_deflator: 122.316, remicon: 110980, rebar: 838000, aluminum: 8866.5, copper: 2584.0, basic_above: 2106000.0, basic_below: 1009000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 75.96, oil_dubai: 79.04, fx_usd: 1453.0, fx_eur: 1491.5 },
+            { date: '2025-03', ccpi_res: 129.8, ccpi_nonres: 130.53, cpi: 116.29, gdp_deflator: 122.316, remicon: 110980, rebar: 838000, aluminum: 9360.5, copper: 2624.0, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 71.62, oil_dubai: 73.23, fx_usd: 1458.7, fx_eur: 1529.37 },
+            { date: '2025-04', ccpi_res: 129.81, ccpi_nonres: 130.53, cpi: 116.38, gdp_deflator: 120.638, remicon: 110980, rebar: 818000, aluminum: 9652.0, copper: 2499.0, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 74.49, oil_dubai: 75.97, fx_usd: 1470.6, fx_eur: 1590.9 },
+            { date: '2025-05', ccpi_res: 129.82, ccpi_nonres: 130.56, cpi: 116.27, gdp_deflator: 120.638, remicon: 108200, rebar: 838000, aluminum: 9195.0, copper: 2377.5, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 61.29, oil_dubai: 62.0, fx_usd: 1426.9, fx_eur: 1611.54 },
+            { date: '2025-06', ccpi_res: 129.82, ccpi_nonres: 130.59, cpi: 116.31, gdp_deflator: 120.638, remicon: 108200, rebar: 858000, aluminum: 9655.0, copper: 2451.0, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 64.63, oil_dubai: 63.93, fx_usd: 1375.7, fx_eur: 1562.73 },
+            { date: '2025-07', ccpi_res: 129.85, ccpi_nonres: 130.59, cpi: 116.52, gdp_deflator: 124.093, remicon: 108200, rebar: 828000, aluminum: 10061.0, copper: 2604.0, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 67.11, oil_dubai: 68.16, fx_usd: 1353.6, fx_eur: 1595.42 },
+            { date: '2025-08', ccpi_res: 129.72, ccpi_nonres: 130.48, cpi: 116.45, gdp_deflator: 124.093, remicon: 108200, rebar: 828000, aluminum: 9535.5, copper: 2545.0, basic_above: 2140000.0, basic_below: 1024000.0, standard_cost: 2380000, standard_labor: 276011, oil_brent: 69.67, oil_dubai: 73.75, fx_usd: 1390.4, fx_eur: 1588.18 },
+            { date: '2025-09', ccpi_res: 130.32, ccpi_nonres: 131.19, cpi: 117.06, gdp_deflator: 124.093, remicon: 108200, rebar: 828000, aluminum: 9804.5, copper: 2612.5, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2380000, standard_labor: 278832, oil_brent: 68.15, oil_dubai: 70.72, fx_usd: 1387.7, fx_eur: 1621.87 },
+            { date: '2025-10', ccpi_res: 130.43, ccpi_nonres: 131.33, cpi: 117.42, gdp_deflator: 124.465, remicon: 108200, rebar: 798000, aluminum: 10263.0, copper: 2683.5, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2380000, standard_labor: 278832, oil_brent: 65.35, oil_dubai: 66.56, fx_usd: 1403.2, fx_eur: 1647.71 },
+            { date: '2025-11', ccpi_res: 130.73, ccpi_nonres: 131.72, cpi: 117.2, gdp_deflator: 124.465, remicon: 108200, rebar: 798000, aluminum: 10872.5, copper: 2903.0, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2380000, standard_labor: 278832, oil_brent: 64.89, oil_dubai: 66.69, fx_usd: 1427.4, fx_eur: 1646.72 },
+            { date: '2025-12', ccpi_res: 130.76, ccpi_nonres: 131.83, cpi: 117.57, gdp_deflator: 124.465, remicon: 108200, rebar: 788000, aluminum: 11299.0, copper: 2860.0, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2380000, standard_labor: 278832, oil_brent: 63.17, oil_dubai: 64.26, fx_usd: 1465.9, fx_eur: 1701.18 },
+            { date: '2026-01', ccpi_res: 131.36, ccpi_nonres: 132.5, cpi: 118.03, gdp_deflator: 125.243, remicon: 108200, rebar: 768000, aluminum: 12571.0, copper: 2986.0, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2392000, standard_labor: 279988, oil_brent: 60.75, oil_dubai: 60.32, fx_usd: 1434.9, fx_eur: 1685.72 },
+            { date: '2026-02', ccpi_res: 131.56, ccpi_nonres: 132.69, cpi: 118.4, gdp_deflator: 125.243, remicon: 108200, rebar: 828000, aluminum: 12987.0, copper: 3042.0, basic_above: 2141000.0, basic_below: 1144000.0, standard_cost: 2392000, standard_labor: 279988, oil_brent: 66.3, oil_dubai: 64.98, fx_usd: 1436.7, fx_eur: 1701.2 },
+            { date: '2026-03', ccpi_res: 132.27, ccpi_nonres: 133.43, cpi: 118.8, gdp_deflator: 125.243, remicon: 108200, rebar: 858000, aluminum: 13230.0, copper: 3226.0, basic_above: 2220000.0, basic_below: 1156000.0, standard_cost: 2392000, standard_labor: 279988, oil_brent: 77.74, oil_dubai: 80.79, fx_usd: 1435.4, fx_eur: 1678.48 },
+            { date: '2026-04', ccpi_res: 134.13, ccpi_nonres: 135.48, cpi: 119.37, gdp_deflator: null, remicon: 108200, rebar: 868000, aluminum: 12270.0, copper: 3583.5, basic_above: 2220000.0, basic_below: 1156000.0, standard_cost: 2392000, standard_labor: 279988, oil_brent: 101.16, oil_dubai: 108.9, fx_usd: 1530.5, fx_eur: 1769.33 }
+        ];
 
         function loadRawData() {
             const stored = localStorage.getItem('hec_dashboard_data_v2');
@@ -2832,7 +2831,7 @@ const defaultRawData = [
             chartTitle: '지표별 그래프',
             chartNote: '기준 연월을 100으로 환산한 상승율 그래프',
             guideTitle: '가이드',
-            guideLead: '적산 및 계약 검토 시 표준 가이드라인 항목입니다.',
+            guideLead: '',
             dataMgmtTitle: '데이터관리',
             dataMgmtLead: '16개 지표의 월별 원시 데이터를 직접 입력·업로드하고, 부분삭제·일괄삭제할 수 있습니다.',
             dataMgmtLeadViewer: '16개 지표의 월별 원시 데이터를 조회할 수 있습니다.',
@@ -3587,17 +3586,17 @@ const defaultRawData = [
             if (simUnit === unit) return;
             const prevUnit = simUnit;
             simUnit = unit;
-            
+
             document.getElementById('sim-unit-krw').classList.toggle('active', unit === 'krw');
             document.getElementById('sim-unit-usd').classList.toggle('active', unit === 'usd');
             document.getElementById('sim-cost-label').textContent =
                 unit === 'krw' ? '계약 공사비 입력 (원)' : '계약 공사비 입력 (USD)';
-            
+
             const input = document.getElementById('sim-base-cost');
             input.placeholder = unit === 'krw' ? '공사비 입력 (원)' : '공사비 입력 (달러)';
-            
+
             // Auto-convert inputted value logic removed as requested by user
-            
+
 
             document.getElementById('sim-rate-label').textContent = '변동율';
             document.getElementById('sim-final-label').textContent = '변경 공사비';
@@ -3607,14 +3606,14 @@ const defaultRawData = [
             document.querySelectorAll('.sim-final-caption').forEach(el => {
                 el.textContent = '변경 공사비';
             });
-            
+
             document.getElementById('sim-fx-meta').classList.toggle('hidden', unit === 'krw');
-            
+
             const usdFormulaEl = document.getElementById('sim-usd-formula');
-            if(usdFormulaEl) usdFormulaEl.classList.toggle('hidden', unit === 'krw');
-            
+            if (usdFormulaEl) usdFormulaEl.classList.toggle('hidden', unit === 'krw');
+
             document.querySelectorAll('.sim-extra').forEach(el => el.classList.add('hidden'));
-            
+
             // Toggle average block visibility based on unit
             const avgBlock = document.getElementById('sim-compare-avg');
             const gridEl = document.querySelector('.sim-results-grid');
@@ -3627,7 +3626,7 @@ const defaultRawData = [
                     if (gridEl) gridEl.style.gridTemplateColumns = 'repeat(3, minmax(0, 1fr))';
                 }
             }
-            
+
             calculateEscalation();
         }
 
@@ -3708,9 +3707,9 @@ const defaultRawData = [
                 } else {
                     rateHTML = `<span class="${rateClass}">${rateText}</span>`;
                 }
-                
+
                 rateEl.innerHTML = rateHTML;
-                rateEl.className = 'sim-compare-rate'; 
+                rateEl.className = 'sim-compare-rate';
 
                 if (!hasInput) {
                     costEl.textContent = '—';
