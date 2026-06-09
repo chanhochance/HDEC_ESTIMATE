@@ -240,6 +240,21 @@
             .chart-select-group {
                 grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
             }
+            /* Landscape (horizontal) mode adjustments */
+            @media (max-width: 900px) and (orientation: landscape) {
+                .category-row {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+                .category-label {
+                    grid-column: span 2;
+                }
+                .chart-select-group {
+                    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+                }
+                .chart-select-group .group-label {
+                    grid-column: span 4;
+                }
+            }
 
             .chart-select-group .group-label {
                 grid-column: 1 / -1;
