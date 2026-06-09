@@ -234,7 +234,7 @@
             }
 
             .chart-select-group {
-                grid-template-columns: repeat(4, minmax(0, 1fr));
+                grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
             }
             .chart-select-group .group-label {
                 grid-column: 1 / -1;
@@ -1368,7 +1368,7 @@
 
         @media (min-width: 768px) {
             .upload-field-grid {
-                grid-template-columns: repeat(4, minmax(0, 1fr));
+                grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
             }
         }
 
@@ -1694,7 +1694,7 @@
     <div id="main-content" class="hidden flex-1 flex flex-col">
 
         <!-- Top Bar -->
-        <div class="topbar px-4">
+        <div class="topbar px-1 md:px-4">
             <div class="brand-chip">
                 <span class="badge">현대건설</span>
                 <strong>주요 물가지표 통합 모니터링 대시보드</strong>
@@ -1712,13 +1712,13 @@
         </div>
 
         <!-- Tab Bar -->
-        <div class="tab-bar px-4">
+        <div class="tab-bar px-1 md:px-4">
             <button onclick="switchTab('dashboard')" id="tab-dashboard" class="tab-btn active">대시보드</button>
             <button onclick="switchTab('guide')" id="tab-guide" class="tab-btn">지표별 설명 가이드</button>
             <button onclick="switchTab('data')" id="tab-data" class="tab-btn">데이터관리</button>
         </div>
 
-        <main class="page-shell px-4 space-y-6 flex-1">
+        <main class="page-shell px-1 md:px-4 space-y-6 flex-1">
 
             <!-- Dashboard Tab -->
             <div id="content-dashboard" class="space-y-6">
@@ -2905,8 +2905,8 @@
                 ctx.font = "700 10px 'Noto Sans KR'";
                 visible.forEach((item, i) => {
                     const y = item.point.y + (i - (visible.length - 1) / 2) * 13;
-                    const x = item.point.x + 8;
                     const metrics = ctx.measureText(item.text);
+                    const x = window.innerWidth < 900 ? item.point.x - 8 - metrics.width : item.point.x + 8;
                     const padX = 4;
                     const boxW = metrics.width + padX * 2;
                     const boxH = 12;
