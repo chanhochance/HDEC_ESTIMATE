@@ -2094,7 +2094,7 @@
                 ]
             },
             {
-                id: 'gov', title: '국가고시', cssClass: 'cat-gov',
+                id: 'gov', title: '건축비 고시', cssClass: 'cat-gov',
                 indicators: [
                     { key: 'basic_above', label: '기본형건축비\n(지상)', unit: ' 원/㎡', link: 'https://www.law.go.kr/LSW/main.html' },
                     { key: 'basic_below', label: '기본형건축비\n(지하)', unit: ' 원/㎡', link: 'https://www.law.go.kr/LSW/main.html' },
@@ -2134,7 +2134,7 @@
         ];
 
         /* 물가지표_업로드_템플릿.xlsx / hec_master.csv 표준 컬럼 (17열)
-           순서 = 대시보드: 물가지수 → 주요자재 → 국가고시 → 기타지표 */
+           순서 = 대시보드: 물가지수 → 주요자재 → 건축비 고시 → 기타지표 */
         const TEMPLATE_COLUMN_ORDER = [
             'date',
             'cci_house', 'cci_nonhouse', 'cpi', 'ppi',
@@ -2685,7 +2685,7 @@
             const onDone = (mergedCount, sheetName) => {
                 if (mergedCount <= 0) {
                     const sheetHint = sheetName ? `\n• 읽은 시트: 「${sheetName}」(UP 시트 우선)` : '';
-                    alert(`업로드할 유효한 데이터 행을 찾지 못했습니다.${sheetHint}\n\n확인 사항:\n• UP 시트: 1행 헤더 + 2행부터 년월·숫자\n• 년월: 2025-05 / 202505 / 2025.05 형식\n• A열이 비어 있으면 「년월」 헤더 열 기준으로 읽음\n• 헤더 17열 순서: date → 물가지수(4) → 주요자재(4) → 국가고시(4) → 기타지표(4)`);
+                    alert(`업로드할 유효한 데이터 행을 찾지 못했습니다.${sheetHint}\n\n확인 사항:\n• UP 시트: 1행 헤더 + 2행부터 년월·숫자\n• 년월: 2025-05 / 202505 / 2025.05 형식\n• A열이 비어 있으면 「년월」 헤더 열 기준으로 읽음\n• 헤더 17열 순서: date → 물가지수(4) → 주요자재(4) → 건축비 고시(4) → 기타지표(4)`);
                 } else {
                     alert(`업로드 완료: 총 ${mergedCount}개월 분량의 지표 원장이 갱신·병합되었습니다.`);
                     saveAndRefresh();
