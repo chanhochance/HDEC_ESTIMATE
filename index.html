@@ -1903,11 +1903,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="chart-sim-save-row">
-                        <button type="button" onclick="downloadReport()" class="btn-download">
-                            <i data-lucide="download" class="w-3.5 h-3.5"></i> 이미지 저장
-                        </button>
-                    </div>
+                    
                 </div>
             </div>
 
@@ -4442,33 +4438,7 @@ window.addEventListener('error', function(e) {
             }
         }
 
-        function downloadReport() {
-            const area = document.getElementById('capture-area');
-            const chartImage = chartInstance ? chartInstance.toBase64Image('image/png', 1) : null;
-
-            html2canvas(area, {
-                scale: 2,
-                useCORS: true,
-                backgroundColor: '#efefed',
-                onclone: (clonedDoc) => {
-                    if (!chartImage) return;
-                    const clonedCanvas = clonedDoc.getElementById('trendsChart');
-                    if (!clonedCanvas || !clonedCanvas.parentNode) return;
-                    const img = clonedDoc.createElement('img');
-                    img.src = chartImage;
-                    img.alt = '지표별 그래프';
-                    img.style.display = 'block';
-                    img.style.width = '100%';
-                    img.style.height = '100%';
-                    clonedCanvas.parentNode.replaceChild(img, clonedCanvas);
-                }
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = `물가지표_대시보드_${formatLocalDate()}.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            });
-        }
+        
     </script>
 </body>
 
