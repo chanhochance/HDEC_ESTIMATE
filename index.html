@@ -2087,10 +2087,10 @@
             {
                 id: 'material', title: '주요자재', cssClass: 'cat-material',
                 indicators: [
-                    { key: 'remicon', label: '레미콘', unit: ' 원/m³', link: 'https://www.kpi.or.kr/www/' },
-                    { key: 'rebar', label: '철근', unit: ' 원/ton', link: 'https://www.kpi.or.kr/www/' },
-                    { key: 'aluminum', label: '알루미늄', unit: ' $/ton', link: 'https://www.komis.or.kr/' },
-                    { key: 'copper', label: '구리', unit: ' $/ton', link: 'https://www.komis.or.kr/' }
+                    { key: 'remicon', label: '레미콘(25-27-15)', unit: ' 원/m³', link: 'https://www.kpi.or.kr/www/' },
+                    { key: 'rebar', label: '철근(SD400-D10)', unit: ' 원/ton', link: 'https://www.kpi.or.kr/www/' },
+                    { key: 'aluminum', label: '구리', unit: ' $/ton', link: 'https://www.komis.or.kr/' },
+                    { key: 'copper', label: '알루미늄', unit: ' $/ton', link: 'https://www.komis.or.kr/' }
                 ]
             },
             {
@@ -2151,8 +2151,8 @@
             ppi: 'gdp_deflator', gdp_deflator: 'gdp_deflator', '건설투자gdp디플레이터지수': 'gdp_deflator', '건설투자gdp디플레이터': 'gdp_deflator', '건설투자gdp디플': 'gdp_deflator', '건설투자gdp': 'gdp_deflator',
             rmc: 'remicon', remicon: 'remicon', '레미콘': 'remicon',
             st: 'rebar', rebar: 'rebar', '철근': 'rebar',
-            lme_al: 'aluminum', aluminum: 'aluminum', '알루미늄': 'aluminum',
             lme_cu: 'copper', copper: 'copper', '구리': 'copper',
+            lme_al: 'aluminum', aluminum: 'aluminum', '알루미늄': 'aluminum',
             oil_brent: 'oil_brent', '유가브렌트': 'oil_brent', '유가(브렌트)': 'oil_brent',
             oil_dubai: 'oil_dubai', '유가두바이': 'oil_dubai', '유가(두바이)': 'oil_dubai',
             fx_usd: 'fx_usd', '환율원달러': 'fx_usd', '환율(원/달러)': 'fx_usd',
@@ -2185,8 +2185,8 @@
             if (norm.includes('건설투자') && (norm.includes('gdp') || norm.includes('디플'))) return 'gdp_deflator';
             if (norm.includes('레미콘')) return 'remicon';
             if (norm.includes('철근')) return 'rebar';
-            if (norm.includes('알루미늄')) return 'aluminum';
             if (norm.includes('구리')) return 'copper';
+            if (norm.includes('알루미늄')) return 'aluminum';
             if (norm.includes('유가') && norm.includes('브렌트')) return 'oil_brent';
             if (norm.includes('유가') && norm.includes('두바이')) return 'oil_dubai';
             if (norm.includes('환율') && (norm.includes('달러') || norm.includes('usd'))) return 'fx_usd';
@@ -2869,8 +2869,8 @@
         defaultGuides.gdp_deflator.desc = '국가 경제 전체의 건설투자 부문 물가 변동을 나타내는 포괄적인 지수입니다. 건설공사비지수보다 더 넓은 범위(간접비, 부대비용 등 포함)의 물가 추이를 반영하므로, 중장기 건설 사업성 타당성 분석 및 대규모 프로젝트의 거시적 예산 수립에 적합합니다.';
         defaultGuides.remicon.desc = '철근콘크리트 공사의 핵심 기초 자재인 레미콘(규격: 24-27-15)의 단가입니다. 건설 현장 초기 구조물 공사비의 상당 비중을 차지하며, 시멘트 및 골재 가격 등락에 직접적으로 연동되므로 현장 원가 관리와 주요 자재 수급 계획 시 가장 우선적으로 모니터링해야 합니다.';
         defaultGuides.rebar.desc = '콘크리트 구조물의 뼈대를 형성하는 철근(규격: 고장력철근 SD400-D10)의 단가입니다. 철스크랩 및 고철 가격 변동에 따라 단가 등락폭이 매우 크며, 토목 및 건축 공사의 구조체 공사비 증감을 결정짓는 가장 중요한 원자재 지표입니다.';
-        defaultGuides.aluminum.desc = '창호, 커튼월, 외장 판넬 등 마감 및 설비 공사에 주로 사용되는 알루미늄의 국제(LME) 시세입니다. 환율 변동과 결합하여 국내 수입 및 가공 단가에 즉각적인 영향을 미치므로, 외장재 비중이 높은 고급 건축물이나 상업 시설의 원가 변동 예측에 필수적입니다.';
-        defaultGuides.copper.desc = '전선, 배관, 각종 전기·통신 설비의 주원료인 구리의 국제(LME) 시세입니다. 플랜트, 하이테크 공장, 스마트 빌딩 등 기전(MEP) 공사 비율이 높은 프로젝트에서 설비 자재비 변동을 예측하고 리스크를 선제적으로 관리하기 위한 선행 지표입니다.';
+        defaultGuides.copper.desc = '전선, 배관, 각종 전기·통신 설비의 주원료인 알루미늄의 국제(LME) 시세입니다. 플랜트, 하이테크 공장, 스마트 빌딩 등 기전(MEP) 공사 비율이 높은 프로젝트에서 설비 자재비 변동을 예측하고 리스크를 선제적으로 관리하기 위한 선행 지표입니다.';
+        defaultGuides.aluminum.desc = '창호, 커튼월, 외장 판넬 등 마감 및 설비 공사에 주로 사용되는 구리의 국제(LME) 시세입니다. 환율 변동과 결합하여 국내 수입 및 가공 단가에 즉각적인 영향을 미치므로, 외장재 비중이 높은 고급 건축물이나 상업 시설의 원가 변동 예측에 필수적입니다.';
         defaultGuides.basic_above.desc = '국토교통부가 분양가상한제 적용 주택의 지상층 적정 건축비를 산정하기 위해 정기적으로 고시하는 기준 단가입니다. 민간 주택사업의 수익성 분석 및 분양가 상한액 산정 시 공식 기준으로 적용되며, 시장 공사비 추이와의 괴리를 파악하는 벤치마크로도 쓰입니다.';
         defaultGuides.basic_below.desc = '국토교통부가 분양가상한제 주택의 지하층(주차장, 기계실 등) 건축비 상한을 산정하기 위해 고시하는 기준 단가입니다. 지하 심도와 면적이 넓은 최근 건축 트렌드상, 사업 초기 지하 공사비의 적정성을 평가하고 예산을 배분할 때 기준이 됩니다.';
         defaultGuides.standard_cost.desc = '공공임대주택 등 공공건설 사업의 건축비 산정 및 국민주택기금 지원 기준으로 국토교통부가 고시하는 표준 단가입니다. 민간 건설공사비 지표와 비교하여 공공 사업의 발주 금액 적정성을 검토하고 보조금 산정의 기준점을 잡는 데 활용됩니다.';
