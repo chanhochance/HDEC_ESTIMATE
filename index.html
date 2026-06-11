@@ -1914,11 +1914,12 @@
             <!-- Guide Tab -->
             <div id="content-guide" class="hidden space-y-6">
                 <div class="panel p-6">
-                    <div class="section-title">
-                        <h3 class="section-heading-with-icon">
+                    <div class="section-title" style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 class="section-heading-with-icon" style="margin: 0;">
                             <i data-lucide="book-open" class="w-5 h-5"></i>
-                            <span id="guide-section-title">가이드</span>
+                            <span id="guide-section-title">지표별 설명</span>
                         </h3>
+                        <span style="font-size: 11px; color: #94a3b8; font-weight: 700;">※ 매월 15일 고시완료된 항목을 기준으로 UPDATE 됩니다.</span>
                     </div>
                     <div id="guide-section-lead-wrap" class="mb-6">
                         <p class="text-sm" id="guide-section-lead" style="color: var(--muted);"></p>
@@ -4289,7 +4290,9 @@ window.addEventListener('error', function(e) {
                     layout: { padding: { right: 10, left: 0 } },
                     scales: {
                         y: {
-                            title: { display: false, text: '지수 (기준=100)', font: { size: 11, weight: 'bold' } },
+                            title: { display: true, text: '지수 (기준=100)', font: { size: 11, weight: 'bold' }  },
+                            suggestedMin: 80,
+                            suggestedMax: 120,
                             grid: { color: 'rgba(0,0,0,.06)' },
                             ticks: { font: { size: 11, family: "'Noto Sans KR'" } }
                         },
